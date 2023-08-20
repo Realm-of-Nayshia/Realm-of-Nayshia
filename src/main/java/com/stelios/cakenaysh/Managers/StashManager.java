@@ -18,6 +18,7 @@ public class StashManager {
     private final Main main = Main.getPlugin(Main.class);
     private final MongoCollection<Document> playerStashes = main.getDatabase().getPlayerStashes();
 
+
     //creates a stash for a player
     public void createStash(Player player){
 
@@ -29,6 +30,7 @@ public class StashManager {
         //create a new stash
         playerStashes.insertOne(new Document("uuid", player.getUniqueId().toString()).append("name", player.getName()).append("stash", new ArrayList<String>()));
     }
+
 
     //adds an item to the player's stash
     public void addItemToStash(Player player, ItemStack item){

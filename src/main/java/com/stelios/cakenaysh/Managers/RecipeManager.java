@@ -16,6 +16,7 @@ public class RecipeManager {
     private final Main main = Main.getPlugin(Main.class);
     private final MongoCollection<Document> playerRecipes = main.getDatabase().getPlayerRecipes();
 
+
     //get the player's list of recipes
     public ArrayList<String> getRecipes(Player player){
 
@@ -29,6 +30,7 @@ public class RecipeManager {
 
         return (ArrayList<String>) Objects.requireNonNull(playerRecipes.find(new Document("uuid", player.getUniqueId().toString())).first()).getList("recipes", String.class);
     }
+
 
     //create a recipes file for the player and remove all their recipes
     public void createRecipeFile(Player player){
@@ -47,6 +49,7 @@ public class RecipeManager {
         }
     }
 
+
     //add a recipe to the player's list
     public void addRecipe(Player player, String recipe){
 
@@ -59,6 +62,7 @@ public class RecipeManager {
         player.discoverRecipe(new NamespacedKey(main, recipe));
     }
 
+
     //remove a recipe from the player's list
     public void removeRecipe(Player player, String recipe){
 
@@ -70,6 +74,7 @@ public class RecipeManager {
         playerRecipes.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("recipes", recipes)));
         player.undiscoverRecipe(new NamespacedKey(main, recipe));
     }
+
 
     //check if the player has a recipe
     public boolean hasRecipe(Player player, String recipe){
@@ -85,6 +90,7 @@ public class RecipeManager {
             }
         }
     }
+
 
     //reset all recipes from the player
     public void resetRecipes(Player player){

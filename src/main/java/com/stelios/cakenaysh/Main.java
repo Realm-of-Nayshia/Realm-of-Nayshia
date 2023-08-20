@@ -42,6 +42,7 @@ public final class Main extends JavaPlugin {
     private StashManager stashManager;
     private CombatManager combatManager;
     private StatsManager statsManager;
+    private PlayerItemManager playerItemManager;
     private RecipeManager recipeManager;
     private PacketManager packetManager;
 
@@ -81,6 +82,7 @@ public final class Main extends JavaPlugin {
         stashManager = new StashManager();
         combatManager = new CombatManager();
         statsManager = new StatsManager(this);
+        playerItemManager = new PlayerItemManager();
         recipeManager = new RecipeManager();
         packetManager = new PacketManager();
     }
@@ -162,6 +164,7 @@ public final class Main extends JavaPlugin {
     public StashManager getStashManager() {return stashManager;}
     public CombatManager getCombatManager() {return combatManager;}
     public StatsManager getStatsManager() {return statsManager;}
+    public PlayerItemManager getPlayerItemManager() {return playerItemManager;}
     public RecipeManager getRecipeManager() {return recipeManager;}
     public PacketManager getPacketManager() {return packetManager;}
 

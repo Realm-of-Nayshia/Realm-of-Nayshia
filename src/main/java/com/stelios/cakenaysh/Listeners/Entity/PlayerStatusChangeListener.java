@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerStatusChangeListener implements Listener {
@@ -21,6 +20,7 @@ public class PlayerStatusChangeListener implements Listener {
         this.main = main;
         this.statsManager = statsManager;
     }
+
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
@@ -40,10 +40,6 @@ public class PlayerStatusChangeListener implements Listener {
         }.runTaskLater(main, 1);
     }
 
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e){
-        statsManager.updateDatabaseStatsPlayer(e.getPlayer());
-    }
 
     @EventHandler
     public void onRespawn(PlayerPostRespawnEvent e){
@@ -60,6 +56,7 @@ public class PlayerStatusChangeListener implements Listener {
         //display the action bar
         statsManager.displayActionBar(player);
     }
+
 
     //cancel vanilla health regen
     @EventHandler
