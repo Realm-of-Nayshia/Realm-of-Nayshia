@@ -1,0 +1,4 @@
+name: Cakenaysh2
+version: '${project.version}'
+main: com.stelios.cakenaysh2.Cakenaysh2
+api-version: '1.20'
