@@ -1,0 +1,69 @@
+name: Cakenaysh
+version: '${project.version}'
+main: com.stelios.cakenaysh.Main
+api-version: '1.20'
+authors: [Stelios]
+description: Main plugin for the Cakenaysh Minecraft Server
+depend: [Citizens]
+softdepend: [Sentinel]
+commands:
+  heal:
+    description: Heals the target player to max health.
+    syntax: /heal <player>
+    permission: op
+  kill:
+    description: Kills the target player.
+    syntax: /kill <player>
+    permission: op
+  vanish:
+    description: Makes the player undetectable and invisible.
+    permission: op
+  giveItem:
+    description: Gives the player the specified item.
+    syntax: /giveitem <player> <item> <amount>
+    permission: op
+  updateCollection:
+    description: Manually updates the given database collection for all players.
+    syntax: /updatecollection <collection>
+    permission: op
+  recipe:
+    description: Adds or removes the specified recipe from the specified player.
+    syntax: /recipe <player> <add/remove/all/reset> <recipe>
+    permission: op
+  setAttribute:
+    description: Sets the specified attribute to the specified value.
+    syntax: /setattribute <player> <attribute> <value>
+    permission: op
+  addAttribute:
+    description: Adds the specified value to the specified attribute.
+    syntax: /addattribute <player> <attribute> <amount>
+    permission: op
+  getAttributes:
+    description: Gets the attributes of the specified player.
+    syntax: /getattributes <player>
+    permission: op
+  resetAttributes:
+    description: Resets the attributes of the specified player.
+    syntax: /resetattributes <player>
+    permission: op
+  setNpcStat:
+    description: Sets the specified stat of the selected npc to the specified value.
+    syntax: /setnpcstat <stat> <value>
+    permission: op
+  getNpcStats:
+    description: Gets the stats of the selected npc.
+    syntax: /getnpcstats
+    permission: op
+  resetNpcStats:
+    description: Resets the stats of the selected npc.
+    syntax: /resetnpcstats
+    permission: op
+  menu:
+    description: Opens the rpg menu.
+    syntax: /menu
+  stash:
+    description: Claims stashed items.
+    syntax: /stash
+  playtime:
+    description: Shows the playtime of the player
+    syntax: /playtime
