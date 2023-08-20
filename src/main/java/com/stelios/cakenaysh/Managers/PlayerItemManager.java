@@ -2,9 +2,10 @@ package com.stelios.cakenaysh.Managers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import com.stelios.cakenaysh.Items.CustomItems;
 import com.stelios.cakenaysh.Main;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bson.Document;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,7 +25,8 @@ public class PlayerItemManager {
         }
 
         //create a new item file
-        playerItems.insertOne(new Document("uuid", player.getUniqueId().toString()).append("name", player.getName()).append("inventory", new ArrayList<String>()));
+        playerItems.insertOne(new Document("uuid", player.getUniqueId().toString()).append("name", player.getName())
+                .append("inventory", new ArrayList<String>()));
     }
 
 
@@ -42,17 +44,18 @@ public class PlayerItemManager {
             }
 
             //if the item is a custom item, add its unique name to the list
-            if (CustomItems.getNameFromItem(item) != null){
-                items.add(CustomItems.getNameFromItem(item));
+            if (item.getItemMeta().getPersistentDataContainer().has(new NamespacedKey(main, "itemType"))){
+                items.add(PlainTextComponentSerializer.plainText().serialize(item.displayName()) + ":" + item.getAmount());
 
             //if the item is a base material, add its material name to the list
             } else {
-                items.add(item.getType().toString());
+                items.add(item.getType() + ":" + item.getAmount());
             }
         }
 
         //update the player's items
-        playerItems.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("inventory", items)));
+        playerItems.updateOne(Filters.eq("uuid", player.getUniqueId().toString()),
+                new Document("$set", new Document("inventory", items)));
     }
 
 }

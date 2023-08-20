@@ -1,6 +1,8 @@
 package com.stelios.cakenaysh.Commands;
 
 import com.stelios.cakenaysh.Main;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
@@ -37,14 +39,30 @@ public class UpdateCollectionCommand implements CommandExecutor {
                     sender.sendMessage(Component.text("Updating stats...", TextColor.color(0,255,0)));
                     main.getStatsManager().updateDatabaseStatsAll();
                     sender.sendMessage(Component.text("Stats updated!", TextColor.color(0,255,0)));
-
                     break;
+
                 case "items":
                     //update each player's current items
                     sender.sendMessage(Component.text("Updating items...", TextColor.color(0,255,0)));
-                    //insert code here
+
+                    for (Player player : main.getServer().getOnlinePlayers()) {
+                        main.getPlayerItemManager().updateItemFile(player);
+                    }
+
                     sender.sendMessage(Component.text("Items updated!", TextColor.color(0,255,0)));
                     break;
+
+                case "npcs":
+                    //update each npc's stats
+                    sender.sendMessage(Component.text("Updating npcs...", TextColor.color(0,255,0)));
+
+                    for (NPC npc : CitizensAPI.getNPCRegistry()) {
+                        main.getNpcInfoManager().updateNpcInfo(npc);
+                    }
+
+                    sender.sendMessage(Component.text("Npcs updated!", TextColor.color(0,255,0)));
+                    break;
+
                 default:
                     sender.sendMessage(Component.text("Invalid argument!", TextColor.color(255,0,0)));
                     return false;
@@ -55,7 +73,14 @@ public class UpdateCollectionCommand implements CommandExecutor {
         //if there are no arguments, update every database collection
         sender.sendMessage(Component.text("Updating collections...", TextColor.color(0,255,0)));
         main.getStatsManager().updateDatabaseStatsAll();
-        //update the player's current items, insert code here
+
+        for (Player player : main.getServer().getOnlinePlayers()) {
+            main.getPlayerItemManager().updateItemFile(player);
+        }
+
+        for (NPC npc : CitizensAPI.getNPCRegistry()) {
+            main.getNpcInfoManager().updateNpcInfo(npc);
+        }
         sender.sendMessage(Component.text("Collections updated!", TextColor.color(0,255,0)));
         return true;
     }

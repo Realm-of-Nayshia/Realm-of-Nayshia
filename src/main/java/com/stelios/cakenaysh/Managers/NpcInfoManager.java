@@ -1,12 +1,13 @@
 package com.stelios.cakenaysh.Managers;
 
 import com.mongodb.client.MongoCollection;
-import com.stelios.cakenaysh.Items.CustomItems;
 import com.stelios.cakenaysh.Main;
 import com.stelios.cakenaysh.Npc.Traits.NpcStats;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bson.Document;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.mcmonkey.sentinel.SentinelTrait;
 
@@ -50,10 +51,10 @@ public class NpcInfoManager {
             }
 
             //if the item is a custom item
-            if (CustomItems.getNameFromItem(item) != null) {
+            if (item.getItemMeta().getPersistentDataContainer().has(new NamespacedKey(main, "itemType"))) {
 
                 //add the custom item's name to the equipment
-                equipment.add(CustomItems.getNameFromItem(item));
+                equipment.add(PlainTextComponentSerializer.plainText().serialize(item.displayName()));
 
             //if the item is a base material
             } else {
@@ -112,10 +113,10 @@ public class NpcInfoManager {
             }
 
             //if the item is a custom item
-            if (CustomItems.getNameFromItem(dropItems.get(i)) != null) {
+            if (dropItems.get(i).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(main, "itemType"))) {
 
                 //add the custom item's name and drop chance to the drops
-                drops.put(CustomItems.getNameFromItem(dropItems.get(i)), dropChances.get(i));
+                drops.put(PlainTextComponentSerializer.plainText().serialize(dropItems.get(i).displayName()), dropChances.get(i));
 
             //if the item is a base material
             } else {

@@ -17,7 +17,7 @@ public class UpdateCollectionTabComplete implements TabCompleter {
 
         //if there is one argument, return a list of possible collections
         if (args.length == 1) {
-            return StringUtil.copyPartialMatches(args[0], java.util.Arrays.asList("stats", "items"), new ArrayList<>());
+            return StringUtil.copyPartialMatches(args[0], java.util.Arrays.asList("stats", "items","npcs"), new ArrayList<>());
         }
 
         //return an empty list
