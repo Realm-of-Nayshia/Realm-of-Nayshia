@@ -45,6 +45,7 @@ com\stelios\cakenaysh\Util\CustomPlayer$11.class
 com\stelios\cakenaysh\Commands\TabComplete\GiveItemTabComplete.class
 com\stelios\cakenaysh\Util\CustomPlayer$17.class
 com\stelios\cakenaysh\Npc\Npcs.class
+com\stelios\cakenaysh\Managers\NpcInfoManager.class
 com\stelios\cakenaysh\Items\Recipes.class
 com\stelios\cakenaysh\Listeners\Entity\SentinelStatusChangeListener.class
 com\stelios\cakenaysh\Listeners\Inventory\InventoryAlteredListener$2.class
@@ -98,6 +99,7 @@ com\stelios\cakenaysh\Util\CustomPlayer.class
 com\stelios\cakenaysh\Items\BattleItem.class
 com\stelios\cakenaysh\Listeners\Entity\PlayerInteractListener.class
 com\stelios\cakenaysh\Commands\RecipeCommand.class
+com\stelios\cakenaysh\Managers\PlayerItemManager.class
 com\stelios\cakenaysh\Npc\Traits\NpcStats.class
 com\stelios\cakenaysh\Listeners\Stats\XpGainListener.class
 com\stelios\cakenaysh\Listeners\Stats\ProficiencyChangedListener.class

@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
 import com.stelios.cakenaysh.Main;
 import com.stelios.cakenaysh.Managers.StatsManager;
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
+import net.citizensnpcs.api.CitizensAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
@@ -142,6 +143,9 @@ public class InventoryAlteredListener implements Listener {
     //update player stats when armor is equipped
     @EventHandler
     public void onEquipArmor(PlayerArmorChangeEvent e){
+
+        //if the player is a npc, return
+        if (CitizensAPI.getNPCRegistry().isNPC(e.getPlayer())) { return; }
 
         Player player = e.getPlayer();
 

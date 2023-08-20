@@ -30,6 +30,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcmonkey.sentinel.SentinelTrait;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -44,6 +45,7 @@ public final class Main extends JavaPlugin {
     private StatsManager statsManager;
     private PlayerItemManager playerItemManager;
     private RecipeManager recipeManager;
+    private NpcInfoManager npcInfoManager;
     private PacketManager packetManager;
 
     @Override
@@ -84,6 +86,7 @@ public final class Main extends JavaPlugin {
         statsManager = new StatsManager(this);
         playerItemManager = new PlayerItemManager();
         recipeManager = new RecipeManager();
+        npcInfoManager = new NpcInfoManager();
         packetManager = new PacketManager();
     }
 
@@ -166,6 +169,7 @@ public final class Main extends JavaPlugin {
     public StatsManager getStatsManager() {return statsManager;}
     public PlayerItemManager getPlayerItemManager() {return playerItemManager;}
     public RecipeManager getRecipeManager() {return recipeManager;}
+    public NpcInfoManager getNpcInfoManager() {return npcInfoManager;}
     public PacketManager getPacketManager() {return packetManager;}
 
 
@@ -184,6 +188,11 @@ public final class Main extends JavaPlugin {
             //remove all player data from every npcStats npc
             if (npc.hasTrait(NpcStats.class)) {
                 npc.getOrAddTrait(NpcStats.class).clearPlayerDamages();
+
+                //update npc info
+                if (npc.hasTrait(SentinelTrait.class)){
+                    npcInfoManager.updateNpcInfo(npc);
+                }
             }
         }
 

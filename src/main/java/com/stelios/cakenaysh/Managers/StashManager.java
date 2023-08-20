@@ -111,7 +111,7 @@ public class StashManager {
             }
 
             //update the player's stash
-        playerStashes.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("stash", stash)));
+            playerStashes.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("stash", stash)));
     }
 
 
