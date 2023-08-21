@@ -647,7 +647,8 @@ public enum CustomItems {
 
 
     //CONSUMABLE ITEMS
-    FILET_MIGNON(new ConsumableItem(Material.COOKED_BEEF, 1, false, "Test Consumable", 4,
+    FILET_MIGNON(new ConsumableItem(Material.COOKED_BEEF, 1, false, "Test Consumable",
+            18, 15,
             new String[]{"Strength", "Crit Damage"},
             new int[]{10, 20},
             new int[]{60, 40},
@@ -670,7 +671,8 @@ public enum CustomItems {
                     new ArrayList<>(Arrays.asList(false, false, false)),
                     new ArrayList<>(Arrays.asList(false, false ,false)))),
 
-    MIGHTY_SUB(new ConsumableItem(Material.BREAD, 1, false, "Mighty Sub", 4,
+    MIGHTY_SUB(new ConsumableItem(Material.BREAD, 1, false, "Mighty Sub",
+            6, 12,
             new String[]{"Health"},
             new int[]{100},
             new int[]{0},
