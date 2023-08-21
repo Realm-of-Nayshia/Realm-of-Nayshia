@@ -13,6 +13,7 @@ import org.mcmonkey.sentinel.SentinelTrait;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class NpcInfoManager {
 
@@ -37,7 +38,7 @@ public class NpcInfoManager {
             npcInfo.insertOne(new Document("uuid", npc.getUniqueId().toString())
                     .append("name", npc.getName())
                     .append("equipment", new ArrayList<String>())
-                    .append("stats", new HashMap<String, Float>())
+                    .append("stats", new LinkedHashMap<String, Float>())
                     .append("drops", new HashMap<String, Double>()));
         }
 
@@ -64,7 +65,7 @@ public class NpcInfoManager {
         }
 
         //get the npc's stats
-        HashMap<String, Float> stats = new HashMap<>();
+        LinkedHashMap<String, Float> stats = new LinkedHashMap<>();
         stats.put("health", (float) sentinelTrait.health);
         stats.put("damage", (float) sentinelTrait.getDamage());
         stats.put("speed", (float) sentinelTrait.speed);

@@ -50,40 +50,8 @@ public class StatsManager {
 
             CustomPlayer customPlayer = main.getPlayerManager().getCustomPlayer(player.getUniqueId());
 
-            //remove the stats from the player's armor
-            for (ItemStack item : player.getInventory().getArmorContents()) {
-
-                if (item != null) {
-
-                    //remove the stats from the armor
-                    removePlayerStats(player, item, "armor");
-                }
-            }
-
-            //remove the stats from the main hand
-            removePlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
-
-            //remove the stats from the offhand
-            removePlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
-
-            //saving the player's stats to the database
+            //save the player's stats to the database
             customPlayer.saveAttributesToDatabase(player);
-
-            //add the stats back to the player's armor
-            for (ItemStack item : player.getInventory().getArmorContents()) {
-
-                if (item != null) {
-
-                    //remove the stats from the armor
-                    addPlayerStats(player, item, "armor");
-                }
-            }
-
-            //add the stats back to the offhand
-            addPlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
-
-            //add the stats back to the main hand
-            addPlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
         }
     }
 
@@ -93,40 +61,8 @@ public class StatsManager {
 
         CustomPlayer customPlayer = main.getPlayerManager().getCustomPlayer(player.getUniqueId());
 
-        //remove the stats from the player's armor
-        for (ItemStack item : player.getInventory().getArmorContents()) {
-
-            if (item != null) {
-
-                //remove the stats from the armor
-                removePlayerStats(player, item, "armor");
-            }
-        }
-
-        //remove the stats from the main hand
-        removePlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
-
-        //remove the stats from the offhand
-        removePlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
-
-        //saving the player's stats to the database
+        //save the player's stats to the database
         customPlayer.saveAttributesToDatabase(player);
-
-        //add the stats back to the player's armor
-        for (ItemStack item : player.getInventory().getArmorContents()) {
-
-            if (item != null) {
-
-                //remove the stats from the armor
-                addPlayerStats(player, item, "armor");
-            }
-        }
-
-        //add the stats back to the offhand
-        addPlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
-
-        //add the stats back to the main hand
-        addPlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
     }
 
 
