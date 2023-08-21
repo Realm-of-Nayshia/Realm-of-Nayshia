@@ -39,6 +39,7 @@ com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoSkills.class
 com\stelios\cakenaysh\AbilityCreation\Abilities\WrathOfSpartaAbility$1.class
 com\stelios\cakenaysh\Items\EquipmentBonuses.class
 com\stelios\cakenaysh\Listeners\Server\ConnectionListener.class
+com\stelios\cakenaysh\Items\ConsumableItem$1.class
 com\stelios\cakenaysh\Util\CustomPlayer$7.class
 com\stelios\cakenaysh\Commands\GetAttributesCommand.class
 com\stelios\cakenaysh\Util\CustomPlayer$11.class

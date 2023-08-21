@@ -24,7 +24,7 @@ public class ConsumableItem extends Item {
     private final PotionEffect[] potionEffects;
 
     public ConsumableItem (Material material, int amount, boolean unstackable, String name,
-                           int foodValue, String[] stats, int[] statsAmount,
+                           int foodValue, float saturationValue, String[] stats, int[] statsAmount,
                            int[] statsDuration, PotionEffect[] potionEffects) {
         super(material, amount, unstackable, name, null);
         this.stats = stats;
@@ -37,7 +37,8 @@ public class ConsumableItem extends Item {
 
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, "consumable");
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, name);
-        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "foodValue"), PersistentDataType.INTEGER, foodValue);
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "foodValue"), PersistentDataType.INTEGER, foodValue - calculateFoodLevel(material));
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "saturationValue"), PersistentDataType.FLOAT, saturationValue - calculateSaturationLevel(material));
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "stats"), DataType.STRING_ARRAY, stats);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "statsAmount"), DataType.INTEGER_ARRAY, statsAmount);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "statsDuration"), DataType.INTEGER_ARRAY, statsDuration);
@@ -89,109 +90,42 @@ public class ConsumableItem extends Item {
         //add the potion effects as lore
         for (PotionEffect effect : potionEffects){
 
-            String name = effect.getType().getName();
-
-            switch (effect.getType().getName()) {
-                case "ABSORPTION":
-                    name = "Absorption";
-                    break;
-                case "BAD_OMEN":
-                    name = "Bad Omen";
-                    break;
-                case "BLINDNESS":
-                    name = "Blindness";
-                    break;
-                case "CONDUIT_POWER":
-                    name = "Conduit Power";
-                    break;
-                case "CONFUSION":
-                    name = "Nausea";
-                    break;
-                case "DAMAGE_RESISTANCE":
-                    name = "Resistance";
-                    break;
-                case "DARKNESS":
-                    name = "Darkness";
-                    break;
-                case "DOLPHINS_GRACE":
-                    name = "Dolphin's Grace";
-                    break;
-                case "FAST_DIGGING":
-                    name = "Haste";
-                    break;
-                case "FIRE_RESISTANCE":
-                    name = "Fire Resistance";
-                    break;
-                case "GLOWING":
-                    name = "Glowing";
-                    break;
-                case "HARM":
-                    name = "Instant Damage";
-                    break;
-                case "HEAL":
-                    name = "Instant Health";
-                    break;
-                case "HEALTH_BOOST":
-                    name = "Health Boost";
-                    break;
-                case "HERO_OF_THE_VILLAGE":
-                    name = "Hero of the Village";
-                    break;
-                case "HUNGER":
-                    name = "Hunger";
-                    break;
-                case "INCREASE_DAMAGE":
-                    name = "Strength";
-                    break;
-                case "INVISIBILITY":
-                    name = "Invisibility";
-                    break;
-                case "JUMP":
-                    name = "Jump Boost";
-                    break;
-                case "LEVITATION":
-                    name = "Levitation";
-                    break;
-                case "LUCK":
-                    name = "Luck";
-                    break;
-                case "NIGHT_VISION":
-                    name = "Night Vision";
-                    break;
-                case "POISON":
-                    name = "Poison";
-                    break;
-                case "REGENERATION":
-                    name = "Regeneration";
-                    break;
-                case "SATURATION":
-                    name = "Saturation";
-                    break;
-                case "SLOW":
-                    name = "Slowness";
-                    break;
-                case "SLOW_DIGGING":
-                    name = "Mining Fatigue";
-                    break;
-                case "SLOW_FALLING":
-                    name = "Slow Falling";
-                    break;
-                case "SPEED":
-                    name = "Speed";
-                    break;
-                case "UNLUCK":
-                    name = "Bad Luck";
-                    break;
-                case "WATER_BREATHING":
-                    name = "Water Breathing";
-                    break;
-                case "WEAKNESS":
-                    name = "Weakness";
-                    break;
-                case "WITHER":
-                    name = "Wither";
-                    break;
-            }
+            String name = switch (effect.getType().getName()) {
+                case "ABSORPTION" -> "Absorption";
+                case "BAD_OMEN" -> "Bad Omen";
+                case "BLINDNESS" -> "Blindness";
+                case "CONDUIT_POWER" -> "Conduit Power";
+                case "CONFUSION" -> "Nausea";
+                case "DAMAGE_RESISTANCE" -> "Resistance";
+                case "DARKNESS" -> "Darkness";
+                case "DOLPHINS_GRACE" -> "Dolphin's Grace";
+                case "FAST_DIGGING" -> "Haste";
+                case "FIRE_RESISTANCE" -> "Fire Resistance";
+                case "GLOWING" -> "Glowing";
+                case "HARM" -> "Instant Damage";
+                case "HEAL" -> "Instant Health";
+                case "HEALTH_BOOST" -> "Health Boost";
+                case "HERO_OF_THE_VILLAGE" -> "Hero of the Village";
+                case "HUNGER" -> "Hunger";
+                case "INCREASE_DAMAGE" -> "Strength";
+                case "INVISIBILITY" -> "Invisibility";
+                case "JUMP" -> "Jump Boost";
+                case "LEVITATION" -> "Levitation";
+                case "LUCK" -> "Luck";
+                case "NIGHT_VISION" -> "Night Vision";
+                case "POISON" -> "Poison";
+                case "REGENERATION" -> "Regeneration";
+                case "SATURATION" -> "Saturation";
+                case "SLOW" -> "Slowness";
+                case "SLOW_DIGGING" -> "Mining Fatigue";
+                case "SLOW_FALLING" -> "Slow Falling";
+                case "SPEED" -> "Speed";
+                case "UNLUCK" -> "Bad Luck";
+                case "WATER_BREATHING" -> "Water Breathing";
+                case "WEAKNESS" -> "Weakness";
+                case "WITHER" -> "Wither";
+                default -> effect.getType().getName();
+            };
 
             TextComponent newLoreLine = Component.text(name + " " + (effect.getAmplifier() + 1), TextColor.color(240, 40, 50))
                     .decoration(TextDecoration.ITALIC, false)
@@ -245,4 +179,93 @@ public class ConsumableItem extends Item {
         this.getItemMeta().lore(loreList);
         return this;
     }
+
+
+    //return the default food level of the material
+    private int calculateFoodLevel(Material material){
+        switch (material) {
+            case BEETROOT, POTATO, DRIED_KELP, TROPICAL_FISH, PUFFERFISH -> {
+                return 1;
+            }
+            case SPIDER_EYE, MELON_SLICE, POISONOUS_POTATO, MUTTON, CHICKEN, COOKIE, GLOW_BERRIES, COD, SALMON, SWEET_BERRIES -> {
+                return 2;
+            }
+            case CARROT, BEEF, PORKCHOP, RABBIT -> {
+                return 3;
+            }
+            case ENCHANTED_GOLDEN_APPLE, GOLDEN_APPLE, APPLE, CHORUS_FRUIT, ROTTEN_FLESH -> {
+                return 4;
+            }
+            case BAKED_POTATO, BREAD, COOKED_COD, COOKED_RABBIT -> {
+                return 5;
+            }
+            case GOLDEN_CARROT, COOKED_MUTTON, COOKED_SALMON, BEETROOT_SOUP, COOKED_CHICKEN, MUSHROOM_STEW, SUSPICIOUS_STEW, HONEY_BOTTLE -> {
+                return 6;
+            }
+            case COOKED_PORKCHOP, COOKED_BEEF, PUMPKIN_PIE -> {
+                return 8;
+            }
+            case RABBIT_STEW -> {
+                return 10;
+            }
+        }
+        return 0;
+    }
+
+
+    //return the default saturation level of the material
+    private float calculateSaturationLevel(Material material){
+        switch (material){
+            case TROPICAL_FISH, PUFFERFISH -> {
+                return 0.2f;
+            }
+            case COOKIE, GLOW_BERRIES, COD, SALMON, SWEET_BERRIES -> {
+                return 0.4f;
+            }
+            case POTATO, DRIED_KELP -> {
+                return 0.6f;
+            }
+            case ROTTEN_FLESH -> {
+                return 0.8f;
+            }
+            case BEETROOT, MELON_SLICE, POISONOUS_POTATO, MUTTON, CHICKEN, HONEY_BOTTLE -> {
+                return 1.2f;
+            }
+            case BEEF, PORKCHOP, RABBIT -> {
+                return 1.8f;
+            }
+            case APPLE, CHORUS_FRUIT -> {
+                return 2.4f;
+            }
+            case SPIDER_EYE -> {
+                return 3.2f;
+            }
+            case CARROT -> {
+                return 3.6f;
+            }
+            case PUMPKIN_PIE -> {
+                return 4.8f;
+            }
+            case BAKED_POTATO, BREAD, COOKED_COD, COOKED_RABBIT -> {
+                return 6f;
+            }
+            case BEETROOT_SOUP, COOKED_CHICKEN, MUSHROOM_STEW, SUSPICIOUS_STEW -> {
+                return 7.2f;
+            }
+            case ENCHANTED_GOLDEN_APPLE, GOLDEN_APPLE, COOKED_MUTTON, COOKED_SALMON -> {
+                return 9.6f;
+            }
+            case RABBIT_STEW -> {
+                return 12f;
+            }
+            case COOKED_BEEF, COOKED_PORKCHOP -> {
+                return 12.8f;
+            }
+            case GOLDEN_CARROT -> {
+                return 14.4f;
+            }
+        }
+        return 0f;
+    }
+
 }
