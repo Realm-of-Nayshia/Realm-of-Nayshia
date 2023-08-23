@@ -9,6 +9,7 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -106,6 +107,7 @@ public class StatsManager {
 
     //display a text display for the damage
     public void displayDamage(Entity entity, int damage, boolean isCritical, Location location){
+        World world = entity.getWorld();
 
         //slightly offset the location
         location.add(((Math.random()*-2)+1)/2, ((Math.random()*-2)+1)/2 + 1, ((Math.random()*-2)+1)/2);
@@ -119,7 +121,7 @@ public class StatsManager {
         }
 
         //spawn the text display
-        TextDisplay textDisplay = (TextDisplay) Bukkit.getWorld(entity.getWorld().getUID()).spawnEntity(location, EntityType.TEXT_DISPLAY);
+        TextDisplay textDisplay = (TextDisplay) Bukkit.getWorld(world.getUID()).spawnEntity(location, EntityType.TEXT_DISPLAY);
         textDisplay.setBillboard(Display.Billboard.CENTER);
         textDisplay.setCustomNameVisible(true);
         textDisplay.customName(damageComponent);
@@ -131,8 +133,10 @@ public class StatsManager {
         new BukkitRunnable(){
             @Override
             public void run() {
+                world.setChunkForceLoaded(location.getChunk().getX(), location.getChunk().getZ(), true);
                 textDisplays.remove(textDisplay);
                 textDisplay.remove();
+                world.setChunkForceLoaded(location.getChunk().getX(), location.getChunk().getZ(), false);
             }
         }.runTaskLater(main, 30);
     }
