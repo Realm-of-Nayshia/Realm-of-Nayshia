@@ -119,64 +119,26 @@ public class NpcStats extends Trait {
 
     //setting a stat
     public void setStat(String name, float value){
-        switch(name){
-            case "xp":
-                xp = value;
-                break;
-            case "critdamage":
-                critDamage = value;
-                break;
-            case "critchance":
-                critChance = value;
-                break;
-            case "strength":
-                strength = value;
-                break;
-            case "defense":
-                defense = value;
-                break;
-            case "infernaldefense":
-                infernalDefense = value;
-                break;
-            case "infernaldamage":
-                infernalDamage = value;
-                break;
-            case "undeaddefense":
-                undeadDefense = value;
-                break;
-            case "undeaddamage":
-                undeadDamage = value;
-                break;
-            case "aquaticdefense":
-                aquaticDefense = value;
-                break;
-            case "aquaticdamage":
-                aquaticDamage = value;
-                break;
-            case "aerialdefense":
-                aerialDefense = value;
-                break;
-            case "aerialdamage":
-                aerialDamage = value;
-                break;
-            case "meleedefense":
-                meleeDefense = value;
-                break;
-            case "meleedamage":
-                meleeDamage = value;
-                break;
-            case "rangeddefense":
-                rangedDefense = value;
-                break;
-            case "rangeddamage":
-                rangedDamage = value;
-                break;
-            case "magicdefense":
-                magicDefense = value;
-                break;
-            case "magicdamage":
-                magicDamage = value;
-                break;
+        switch (name) {
+            case "xp" -> xp = value;
+            case "critdamage" -> critDamage = value;
+            case "critchance" -> critChance = value;
+            case "strength" -> strength = value;
+            case "defense" -> defense = value;
+            case "infernaldefense" -> infernalDefense = value;
+            case "infernaldamage" -> infernalDamage = value;
+            case "undeaddefense" -> undeadDefense = value;
+            case "undeaddamage" -> undeadDamage = value;
+            case "aquaticdefense" -> aquaticDefense = value;
+            case "aquaticdamage" -> aquaticDamage = value;
+            case "aerialdefense" -> aerialDefense = value;
+            case "aerialdamage" -> aerialDamage = value;
+            case "meleedefense" -> meleeDefense = value;
+            case "meleedamage" -> meleeDamage = value;
+            case "rangeddefense" -> rangedDefense = value;
+            case "rangeddamage" -> rangedDamage = value;
+            case "magicdefense" -> magicDefense = value;
+            case "magicdamage" -> magicDamage = value;
         }
     }
 
