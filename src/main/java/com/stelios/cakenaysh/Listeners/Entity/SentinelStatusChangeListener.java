@@ -88,6 +88,11 @@ public class SentinelStatusChangeListener implements Listener {
 
                     Player player = Bukkit.getPlayer(uuid);
 
+                    //if the player dealt more than 17.5% of the total damage to the npc, give them credit for killing the npc
+                    if (playerDamages.get(uuid) / totalDamage > 0.175) {
+                        main.getNpcInfoManager().addNpcKill(uuid, npc);
+                    }
+
                     //if the player is offline continue
                     if (player == null) continue;
 

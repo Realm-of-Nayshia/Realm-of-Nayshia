@@ -58,6 +58,10 @@ commands:
     description: Resets the stats of the selected npc.
     syntax: /resetnpcstats
     permission: op
+  setNpcQuest:
+    description: Set the specified quest linked to the npc.
+    syntax: /npcquest <quest>
+    permission: op
   menu:
     description: Opens the rpg menu.
     syntax: /menu

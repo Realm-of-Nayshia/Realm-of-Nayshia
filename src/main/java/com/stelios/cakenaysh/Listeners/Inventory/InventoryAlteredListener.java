@@ -86,7 +86,7 @@ public class InventoryAlteredListener implements Listener {
             //remove the stats of the old item
             statsManager.removePlayerStats(player, e.getOldItemStack(), "weapon");
 
-            //if the item is being moved into or out of the offhand
+        //if the item is being moved into or out of the offhand
         } else if (e.getSlot() == 40){
 
             //remove the stats of the old item
@@ -133,11 +133,11 @@ public class InventoryAlteredListener implements Listener {
 
         Player player = e.getPlayer();
 
-        //remove the stats from the item they were holding
-        statsManager.removePlayerStats(player, player.getInventory().getItem(e.getPreviousSlot()), "weapon");
-
         //add the stats of the new item being held
         statsManager.addPlayerStats(player, player.getInventory().getItem(e.getNewSlot()), "weapon");
+
+        //remove the stats from the item they were holding
+        statsManager.removePlayerStats(player, player.getInventory().getItem(e.getPreviousSlot()), "weapon");
     }
 
     //update player stats when armor is equipped

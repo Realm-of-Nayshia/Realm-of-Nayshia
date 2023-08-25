@@ -176,8 +176,23 @@ public enum CustomItems {
                     new ArrayList<>(Arrays.asList(false)),
                     new ArrayList<>(Arrays.asList(false)))),
 
+    ACCEPT_BUTTON(new Item(Material.GREEN_CONCRETE, 1, false)
+            .setDisplayName(new ArrayList<>(Arrays.asList("Accept")),
+                    new ArrayList<>(Arrays.asList(0,255,0)),
+                    new ArrayList<>(Arrays.asList(true)),
+                    new ArrayList<>(Arrays.asList(false)),
+                    new ArrayList<>(Arrays.asList(true)),
+                    new ArrayList<>(Arrays.asList(false)),
+                    new ArrayList<>(Arrays.asList(false)))),
 
-
+    DECLINE_BUTTON(new Item(Material.RED_CONCRETE, 1, false)
+            .setDisplayName(new ArrayList<>(Arrays.asList("Decline")),
+                    new ArrayList<>(Arrays.asList(255,0,0)),
+                    new ArrayList<>(Arrays.asList(true)),
+                    new ArrayList<>(Arrays.asList(false)),
+                    new ArrayList<>(Arrays.asList(true)),
+                    new ArrayList<>(Arrays.asList(false)),
+                    new ArrayList<>(Arrays.asList(false)))),
 
 
     //BATTLE ITEMS

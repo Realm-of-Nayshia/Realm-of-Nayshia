@@ -342,6 +342,255 @@ public class CustomPlayer {
     }
 
 
+    //does the player meet the specified stat level
+    public boolean meetsStatRequirement(String stat, Float numberValue, String stringValue) {
+
+        //if the stat is a string
+        if (stringValue != null) {
+
+            switch (stat) {
+                case "rank" -> {
+                    if (rank.equals(stringValue)) {
+                        return true;
+                    }
+                }
+                case "faction" -> {
+                    if (faction.equals(stringValue)) {
+                        return true;
+                    }
+                }
+                case "joinDate" -> {
+                    if (joinDate.equals(stringValue)) {
+                        return true;
+                    }
+                }
+                default -> {
+                    return false;
+                }
+            }
+        }
+
+        //if the stat is a number
+        switch (stat) {
+            case "playTime" -> {
+                if (playTime >= numberValue) {
+                    return true;
+                }
+            }
+            case "level" -> {
+                if (level >= numberValue) {
+                    return true;
+                }
+            }
+            case "investmentPoints" -> {
+                if (investmentPoints >= numberValue) {
+                    return true;
+                }
+            }
+            case "xp" -> {
+                if (xp >= numberValue) {
+                    return true;
+                }
+            }
+            case "staminaRegen" -> {
+                if (staminaRegen >= numberValue) {
+                    return true;
+                }
+            }
+            case "stamina" -> {
+                if (stamina >= numberValue) {
+                    return true;
+                }
+            }
+            case "maxStamina" -> {
+                if (maxStamina >= numberValue) {
+                    return true;
+                }
+            }
+            case "healthRegen" -> {
+                if (healthRegen >= numberValue) {
+                    return true;
+                }
+            }
+            case "health" -> {
+                if (health >= numberValue) {
+                    return true;
+                }
+            }
+            case "maxHealth" -> {
+                if (maxHealth >= numberValue) {
+                    return true;
+                }
+            }
+            case "meleeProficiency" -> {
+                if (meleeProficiency >= numberValue) {
+                    return true;
+                }
+            }
+            case "rangedProficiency" -> {
+                if (rangedProficiency >= numberValue) {
+                    return true;
+                }
+            }
+            case "armorProficiency" -> {
+                if (armorProficiency >= numberValue) {
+                    return true;
+                }
+            }
+            case "wilsonCoin" -> {
+                if (wilsonCoin >= numberValue) {
+                    return true;
+                }
+            }
+            case "piety" -> {
+                if (piety >= numberValue) {
+                    return true;
+                }
+            }
+            case "charisma" -> {
+                if (charisma >= numberValue) {
+                    return true;
+                }
+            }
+            case "deception" -> {
+                if (deception >= numberValue) {
+                    return true;
+                }
+            }
+            case "agility" -> {
+                if (agility >= numberValue) {
+                    return true;
+                }
+            }
+            case "luck" -> {
+                if (luck >= numberValue) {
+                    return true;
+                }
+            }
+            case "stealth" -> {
+                if (stealth >= numberValue) {
+                    return true;
+                }
+            }
+            case "damage" -> {
+                if (damage >= numberValue) {
+                    return true;
+                }
+            }
+            case "bonusDamage" -> {
+                if (bonusDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "attackSpeed" -> {
+                if (attackSpeed >= numberValue) {
+                    return true;
+                }
+            }
+            case "critChance" -> {
+                if (critChance >= numberValue) {
+                    return true;
+                }
+            }
+            case "critDamage" -> {
+                if (critDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "strength" -> {
+                if (strength >= numberValue) {
+                    return true;
+                }
+            }
+            case "defense" -> {
+                if (defense >= numberValue) {
+                    return true;
+                }
+            }
+            case "speed" -> {
+                if (speed >= numberValue) {
+                    return true;
+                }
+            }
+            case "infernalDefense" -> {
+                if (infernalDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "infernalDamage" -> {
+                if (infernalDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "undeadDefense" -> {
+                if (undeadDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "undeadDamage" -> {
+                if (undeadDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "aquaticDefense" -> {
+                if (aquaticDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "aquaticDamage" -> {
+                if (aquaticDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "aerialDefense" -> {
+                if (aerialDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "aerialDamage" -> {
+                if (aerialDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "meleeDefense" -> {
+                if (meleeDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "meleeDamage" -> {
+                if (meleeDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "rangedDefense" -> {
+                if (rangedDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "rangedDamage" -> {
+                if (rangedDamage >= numberValue) {
+                    return true;
+                }
+            }
+            case "magicDefense" -> {
+                if (magicDefense >= numberValue) {
+                    return true;
+                }
+            }
+            case "magicDamage" -> {
+                if (magicDamage >= numberValue) {
+                    return true;
+                }
+            }
+            default -> {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+
     //resets all the database attributes of the player
     public void resetAttributes(Player player) {
         CustomPlayer customPlayer = main.getPlayerManager().getCustomPlayer(player.getUniqueId());
@@ -509,199 +758,197 @@ public class CustomPlayer {
     //adds the specified stat and amount to the player for a specified amount of time
     public void addStatWithDelay(String stat, int amount, long ticks){
 
-        switch (stat.toLowerCase()){
-            case "health":
-                health += amount;
-                break;
-            case "damage":
+        switch (stat.toLowerCase()) {
+            case "health" -> health += amount;
+            case "damage" -> {
                 damage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         damage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "bonusdamage":
+            }
+            case "bonusdamage" -> {
                 bonusDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         bonusDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "critchance":
+            }
+            case "critchance" -> {
                 critChance += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         critChance -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "critdamage":
+            }
+            case "critdamage" -> {
                 critDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         critDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "strength":
+            }
+            case "strength" -> {
                 strength += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         strength -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "defense":
+            }
+            case "defense" -> {
                 defense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         defense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "speed":
+            }
+            case "speed" -> {
                 setSpeed(speed + amount);
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         setSpeed(speed - amount);
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "infernaldefense":
+            }
+            case "infernaldefense" -> {
                 infernalDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         infernalDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "infernaldamage":
+            }
+            case "infernaldamage" -> {
                 infernalDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         infernalDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "undeaddefense":
+            }
+            case "undeaddefense" -> {
                 undeadDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         undeadDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "undeaddamage":
+            }
+            case "undeaddamage" -> {
                 undeadDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         undeadDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "aquaticdefense":
+            }
+            case "aquaticdefense" -> {
                 aquaticDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         aquaticDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "aquaticdamage":
+            }
+            case "aquaticdamage" -> {
                 aquaticDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         aquaticDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "aerialdefense":
+            }
+            case "aerialdefense" -> {
                 aerialDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         aerialDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "aerialdamage":
+            }
+            case "aerialdamage" -> {
                 aerialDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         aerialDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "meleedefense":
+            }
+            case "meleedefense" -> {
                 meleeDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         meleeDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "meleedamage":
+            }
+            case "meleedamage" -> {
                 meleeDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         meleeDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "rangeddefense":
+            }
+            case "rangeddefense" -> {
                 rangedDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         rangedDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "rangeddamage":
+            }
+            case "rangeddamage" -> {
                 rangedDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         rangedDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "magicdefense":
+            }
+            case "magicdefense" -> {
                 magicDefense += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         magicDefense -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
-            case "magicdamage":
+            }
+            case "magicdamage" -> {
                 magicDamage += amount;
-                new BukkitRunnable(){
+                new BukkitRunnable() {
                     @Override
                     public void run() {
                         magicDamage -= amount;
                     }
                 }.runTaskLater(main, ticks);
-                break;
+            }
         }
     }
 
@@ -709,73 +956,29 @@ public class CustomPlayer {
     //adds the specified stat and amount to the player
     public void addStat(String stat, int amount){
 
-        switch (stat){
-            case "maxhealth":
-                maxHealth += amount;
-                break;
-            case "damage":
-                damage += amount;
-                break;
-            case "bonusDamage":
-                bonusDamage += amount;
-                break;
-            case "critChance":
-                critChance += amount;
-                break;
-            case "critDamage":
-                critDamage += amount;
-                break;
-            case "strength":
-                strength += amount;
-                break;
-            case "defense":
-                defense += amount;
-                break;
-            case "speed":
-                setSpeed(speed + amount);
-                break;
-            case "infernalDefense":
-                infernalDefense += amount;
-                break;
-            case "infernalDamage":
-                infernalDamage += amount;
-                break;
-            case "undeadDefense":
-                undeadDefense += amount;
-                break;
-            case "undeadDamage":
-                undeadDamage += amount;
-                break;
-            case "aquaticDefense":
-                aquaticDefense += amount;
-                break;
-            case "aquaticDamage":
-                aquaticDamage += amount;
-                break;
-            case "aerialDefense":
-                aerialDefense += amount;
-                break;
-            case "aerialDamage":
-                aerialDamage += amount;
-                break;
-            case "meleeDefense":
-                meleeDefense += amount;
-                break;
-            case "meleeDamage":
-                meleeDamage += amount;
-                break;
-            case "rangedDefense":
-                rangedDefense += amount;
-                break;
-            case "rangedDamage":
-                rangedDamage += amount;
-                break;
-            case "magicDefense":
-                magicDefense += amount;
-                break;
-            case "magicDamage":
-                magicDamage += amount;
-                break;
+        switch (stat) {
+            case "maxhealth" -> maxHealth += amount;
+            case "damage" -> damage += amount;
+            case "bonusDamage" -> bonusDamage += amount;
+            case "critChance" -> critChance += amount;
+            case "critDamage" -> critDamage += amount;
+            case "strength" -> strength += amount;
+            case "defense" -> defense += amount;
+            case "speed" -> setSpeed(speed + amount);
+            case "infernalDefense" -> infernalDefense += amount;
+            case "infernalDamage" -> infernalDamage += amount;
+            case "undeadDefense" -> undeadDefense += amount;
+            case "undeadDamage" -> undeadDamage += amount;
+            case "aquaticDefense" -> aquaticDefense += amount;
+            case "aquaticDamage" -> aquaticDamage += amount;
+            case "aerialDefense" -> aerialDefense += amount;
+            case "aerialDamage" -> aerialDamage += amount;
+            case "meleeDefense" -> meleeDefense += amount;
+            case "meleeDamage" -> meleeDamage += amount;
+            case "rangedDefense" -> rangedDefense += amount;
+            case "rangedDamage" -> rangedDamage += amount;
+            case "magicDefense" -> magicDefense += amount;
+            case "magicDamage" -> magicDamage += amount;
         }
     }
 
@@ -783,73 +986,29 @@ public class CustomPlayer {
     //removes the specified stat and amount to the player
     public void removeStat(String stat, int amount){
 
-        switch (stat){
-            case "maxhealth":
-                maxHealth -= amount;
-                break;
-            case "damage":
-                damage -= amount;
-                break;
-            case "bonusDamage":
-                bonusDamage -= amount;
-                break;
-            case "critChance":
-                critChance -= amount;
-                break;
-            case "critDamage":
-                critDamage -= amount;
-                break;
-            case "strength":
-                strength -= amount;
-                break;
-            case "defense":
-                defense -= amount;
-                break;
-            case "speed":
-                setSpeed(speed - amount);
-                break;
-            case "infernalDefense":
-                infernalDefense -= amount;
-                break;
-            case "infernalDamage":
-                infernalDamage -= amount;
-                break;
-            case "undeadDefense":
-                undeadDefense -= amount;
-                break;
-            case "undeadDamage":
-                undeadDamage -= amount;
-                break;
-            case "aquaticDefense":
-                aquaticDefense -= amount;
-                break;
-            case "aquaticDamage":
-                aquaticDamage -= amount;
-                break;
-            case "aerialDefense":
-                aerialDefense -= amount;
-                break;
-            case "aerialDamage":
-                aerialDamage -= amount;
-                break;
-            case "meleeDefense":
-                meleeDefense -= amount;
-                break;
-            case "meleeDamage":
-                meleeDamage -= amount;
-                break;
-            case "rangedDefense":
-                rangedDefense -= amount;
-                break;
-            case "rangedDamage":
-                rangedDamage -= amount;
-                break;
-            case "magicDefense":
-                magicDefense -= amount;
-                break;
-            case "magicDamage":
-                magicDamage -= amount;
-                break;
+        switch (stat) {
+            case "maxhealth" -> maxHealth -= amount;
+            case "damage" -> damage -= amount;
+            case "bonusDamage" -> bonusDamage -= amount;
+            case "critChance" -> critChance -= amount;
+            case "critDamage" -> critDamage -= amount;
+            case "strength" -> strength -= amount;
+            case "defense" -> defense -= amount;
+            case "speed" -> setSpeed(speed - amount);
+            case "infernalDefense" -> infernalDefense -= amount;
+            case "infernalDamage" -> infernalDamage -= amount;
+            case "undeadDefense" -> undeadDefense -= amount;
+            case "undeadDamage" -> undeadDamage -= amount;
+            case "aquaticDefense" -> aquaticDefense -= amount;
+            case "aquaticDamage" -> aquaticDamage -= amount;
+            case "aerialDefense" -> aerialDefense -= amount;
+            case "aerialDamage" -> aerialDamage -= amount;
+            case "meleeDefense" -> meleeDefense -= amount;
+            case "meleeDamage" -> meleeDamage -= amount;
+            case "rangedDefense" -> rangedDefense -= amount;
+            case "rangedDamage" -> rangedDamage -= amount;
+            case "magicDefense" -> magicDefense -= amount;
+            case "magicDamage" -> magicDamage -= amount;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.stelios.cakenaysh.Managers;
 
+import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoCollection;
 import com.stelios.cakenaysh.Main;
 import com.stelios.cakenaysh.Npc.Traits.NpcStats;
@@ -7,13 +8,12 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.mcmonkey.sentinel.SentinelTrait;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class NpcInfoManager {
 
@@ -39,7 +39,8 @@ public class NpcInfoManager {
                     .append("name", npc.getName())
                     .append("equipment", new ArrayList<String>())
                     .append("stats", new LinkedHashMap<String, Float>())
-                    .append("drops", new HashMap<String, Double>()));
+                    .append("drops", new HashMap<String, Double>())
+                    .append("killed", new HashMap<String, Integer>()));
         }
 
         //get the npc's equipment
@@ -129,7 +130,47 @@ public class NpcInfoManager {
         //update the npc's document
         Document update = new Document("name", npc.getName()).append("equipment", equipment).append("stats", stats).append("drops", drops);
         npcInfo.updateOne(new Document("uuid", npc.getUniqueId().toString()), new Document("$set", update));
-
     }
 
+
+    //adds a kill to the specified player's npc kill count
+    public void addNpcKill(UUID playerUUID, NPC npc) {
+
+        //get the npc uuid and the player name
+        String npcUUID = npc.getUniqueId().toString();
+        String playerName = Bukkit.getOfflinePlayer(playerUUID).getName();
+
+        //if the npc is not a sentinel with the npcstats trait
+        if (!(npc.hasTrait(SentinelTrait.class) && npc.hasTrait(NpcStats.class))){
+            return;
+        }
+
+        //if the npc doesn't have an info document, create one
+        if (npcInfo.find(new Document("uuid", npcUUID)).first() == null){
+            updateNpcInfo(npc);
+        }
+
+        //create a new gson
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        //get the player's npc kill count
+        HashMap<String, Integer> killed = gsonBuilder.create().fromJson(npcInfo.find(new Document("uuid", npcUUID)).first().get("killed").toString(), HashMap.class);
+
+        //if the player has killed the npc before
+        if (killed.containsKey(playerName)){
+
+            //add one to the npc's kill count
+            killed.put(playerName, killed.get(playerName) + 1);
+
+        //if the player hasn't killed the npc before
+        } else {
+
+            //add the npc to the player's npc kill count
+            killed.put(playerName, 1);
+        }
+
+        //update the player's npc kill count
+        Document update = new Document("killed", killed);
+        npcInfo.updateOne(new Document("uuid", npcUUID), new Document("$set", update));
+    }
 }

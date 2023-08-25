@@ -33,6 +33,7 @@ public class ConnectionListener implements Listener {
         main.getStashManager().createStash(player);
         main.getRecipeManager().createRecipeFile(player);
         main.getPlayerItemManager().createItemFile(player);
+        main.getQuestManager().createQuestFile(player);
     }
 
     @EventHandler

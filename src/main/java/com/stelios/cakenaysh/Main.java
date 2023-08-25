@@ -17,6 +17,7 @@ import com.stelios.cakenaysh.Listeners.Stats.SpeedChangedListener;
 import com.stelios.cakenaysh.Listeners.Stats.XpGainListener;
 import com.stelios.cakenaysh.Managers.*;
 import com.stelios.cakenaysh.MenuCreation.MenuListener;
+import com.stelios.cakenaysh.Npc.Traits.NpcQuest;
 import com.stelios.cakenaysh.Npc.Traits.NpcStats;
 import com.stelios.cakenaysh.Util.Database;
 import net.citizensnpcs.api.CitizensAPI;
@@ -44,7 +45,9 @@ public final class Main extends JavaPlugin {
     private CombatManager combatManager;
     private StatsManager statsManager;
     private PlayerItemManager playerItemManager;
+    private PlayerInventoryManager playerInventoryManager;
     private RecipeManager recipeManager;
+    private QuestManager questManager;
     private NpcInfoManager npcInfoManager;
     private PacketManager packetManager;
 
@@ -85,7 +88,9 @@ public final class Main extends JavaPlugin {
         combatManager = new CombatManager();
         statsManager = new StatsManager(this);
         playerItemManager = new PlayerItemManager();
+        playerInventoryManager = new PlayerInventoryManager();
         recipeManager = new RecipeManager();
+        questManager = new QuestManager();
         npcInfoManager = new NpcInfoManager();
         packetManager = new PacketManager();
     }
@@ -107,6 +112,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerAdvancementCompletedListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDiscoverRecipeEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerItemConsumeListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new NpcClickedListener(this), this);
     }
 
     @SuppressWarnings("DataFlowIssue")
@@ -144,6 +150,9 @@ public final class Main extends JavaPlugin {
 
         getCommand("updatecollection").setExecutor(new UpdateCollectionCommand());
         getCommand("updatecollection").setTabCompleter(new UpdateCollectionTabComplete());
+
+        getCommand("setnpcquest").setExecutor(new SetNpcQuestCommand());
+        getCommand("setnpcquest").setTabCompleter(new SetNpcQuestTabComplete());
     }
 
     private void registerAbilities(){
@@ -153,6 +162,7 @@ public final class Main extends JavaPlugin {
 
     private void registerTraits(){
         CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(NpcStats.class).withName("npcstats"));
+        CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(NpcQuest.class).withName("npcquest"));
     }
 
     private void registerRecipes() {
@@ -168,7 +178,9 @@ public final class Main extends JavaPlugin {
     public CombatManager getCombatManager() {return combatManager;}
     public StatsManager getStatsManager() {return statsManager;}
     public PlayerItemManager getPlayerItemManager() {return playerItemManager;}
+    public PlayerInventoryManager getPlayerInventoryManager() {return playerInventoryManager;}
     public RecipeManager getRecipeManager() {return recipeManager;}
+    public QuestManager getQuestManager() {return questManager;}
     public NpcInfoManager getNpcInfoManager() {return npcInfoManager;}
     public PacketManager getPacketManager() {return packetManager;}
 
