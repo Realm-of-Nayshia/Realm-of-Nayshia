@@ -146,7 +146,7 @@ public class QuestManager {
 
         //add the stats to the player
         for (String stat : quest.getQuestRewards().getStats().keySet()) {
-            main.getPlayerManager().getCustomPlayer(player.getUniqueId()).addStat(stat, quest.getQuestRewards().getStats().get(stat).intValue());
+            main.getPlayerManager().getCustomPlayer(player.getUniqueId()).addPermanentStat(stat, quest.getQuestRewards().getStats().get(stat));
         }
 
         //update the quest statuses

@@ -12,8 +12,10 @@ public enum Quests {
             -1L, 11, 11,
             new QuestRewards(100, new ArrayList<>(Arrays.asList(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
             new HashMap<>(){{
-                put("Strength", 1.0f);
-                put("Health", 100f);
+                put("maxHealth", 10);
+                put("maxStamina", 1);
+                put("stealth", 1);
+                put("wilsonCoin", 100);
             }}),
             new QuestRequirements(new ArrayList<>(),false, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
             new QuestRequirements(new ArrayList<>(Arrays.asList(CustomItems.WRATH_OF_SPARTA.getItem())),

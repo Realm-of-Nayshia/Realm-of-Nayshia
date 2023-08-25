@@ -5,7 +5,6 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\VanishCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Entity\EntityPotionEffectListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Stats\SpeedChangedListener.java
-C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\ConfirmationMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\RecipeTabComplete.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\RecipeManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Quests\Quest.java
@@ -48,6 +47,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\SetNpcQuestCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\Recipes.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Server\ServerStartupListener.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\QuestAcceptMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Entity\EntityDamagedListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\MenuManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Quests\Quests.java

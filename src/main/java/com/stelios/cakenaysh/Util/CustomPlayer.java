@@ -953,6 +953,29 @@ public class CustomPlayer {
     }
 
 
+    //adds a stat permanently to the player
+    public void addPermanentStat(String stat, int amount){
+
+        switch (stat) {
+            case ("investmentPoints") -> investmentPoints += amount;
+            case ("staminaRegen") -> staminaRegen += amount;
+            case ("maxStamina") -> maxStamina += amount;
+            case ("healthRegen") -> healthRegen += amount;
+            case ("maxHealth") -> maxHealth += amount;
+            case ("meleeProficiency") -> meleeProficiency += amount;
+            case ("rangedProficiency") -> rangedProficiency += amount;
+            case ("armorProficiency") -> armorProficiency += amount;
+            case ("wilsonCoin") -> wilsonCoin += amount;
+            case ("piety") -> piety += amount;
+            case ("charisma") -> charisma += amount;
+            case ("deception") -> deception += amount;
+            case ("agility") -> agility += amount;
+            case ("luck") -> luck += amount;
+            case ("stealth") -> stealth += amount;
+        }
+    }
+
+
     //adds the specified stat and amount to the player
     public void addStat(String stat, int amount){
 

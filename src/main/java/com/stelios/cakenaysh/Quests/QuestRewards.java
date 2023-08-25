@@ -9,13 +9,13 @@ public class QuestRewards {
 
     private final int xp;
     private final ArrayList<Item> items;
-    private final HashMap<String, Float> stats;
+    private final HashMap<String, Integer> stats;
 
 
     //@param xp: the xp rewarded
     //@param items: the items rewarded
     //@param stats: the stats rewarded
-    public QuestRewards(int xp, ArrayList<Item> items, HashMap<String, Float> stats) {
+    public QuestRewards(int xp, ArrayList<Item> items, HashMap<String, Integer> stats) {
         this.xp = xp;
         this.items = items;
         this.stats = stats;
@@ -28,7 +28,7 @@ public class QuestRewards {
     public ArrayList<Item> getItems() {
         return items;
     }
-    public HashMap<String, Float> getStats() {
+    public HashMap<String, Integer> getStats() {
         return stats;
     }
 
