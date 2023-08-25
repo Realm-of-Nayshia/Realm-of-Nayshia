@@ -122,7 +122,7 @@ public class PlayerInfoMain extends Menu {
         //quests button
         MenuButton questsButton = new MenuButton(CustomItems.QUESTS.getItem().build());
         questsButton.setWhenClicked(clicked ->
-                clicked.sendMessage("You clicked on your quests"));
+                new PlayerInfoQuests(player).open(clicked));
 
         registerButton(questsButton, 23);
 
