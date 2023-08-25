@@ -38,6 +38,7 @@ public class NpcQuest extends Trait {
             Component.text("Quest completed text 2"),
             Component.text("Quest completed text 3")));
     @Persist("quest") String questName;
+    @Persist("isSpeaking") boolean isSpeaking = false;
 
 
     //getters
@@ -55,6 +56,9 @@ public class NpcQuest extends Trait {
     }
     public String getQuestName() {
         return questName;
+    }
+    public boolean isSpeaking() {
+        return isSpeaking;
     }
 
 
@@ -74,6 +78,9 @@ public class NpcQuest extends Trait {
     public void setQuestName(String questName) {
         this.questName = questName;
     }
+    public void setSpeaking(boolean speaking) {
+        isSpeaking = speaking;
+    }
 
 
     //reset all text
@@ -83,6 +90,7 @@ public class NpcQuest extends Trait {
         activeText = new ArrayList<>();
         completedText = new ArrayList<>();
         questName = "";
+        isSpeaking = false;
     }
 
 }
