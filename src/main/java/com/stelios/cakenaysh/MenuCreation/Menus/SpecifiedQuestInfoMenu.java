@@ -63,7 +63,7 @@ public class SpecifiedQuestInfoMenu extends Menu {
             BookMeta bookMeta = (BookMeta) book.getItemMeta();
             bookMeta.setTitle(questName);
             bookMeta.setAuthor(CitizensAPI.getNPCRegistry().getById(quest.getQuestGiverId()).getName());
-            bookMeta.addPages(Component.text(quest.getDescription()));
+            bookMeta.addPages(quest.getBookDescription());
             book.setItemMeta(bookMeta);
 
             //open the book

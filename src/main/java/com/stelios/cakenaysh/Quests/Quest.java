@@ -1,9 +1,11 @@
 package com.stelios.cakenaysh.Quests;
 
+import net.kyori.adventure.text.TextComponent;
+
 public class Quest {
 
     private final String name;
-    private final String description;
+    private final TextComponent[] bookDescription;
     private final long cooldown;
     private final int questGiverId;
     private final int questCompleterId;
@@ -19,10 +21,10 @@ public class Quest {
     //@param questRewards: the rewards for completing the quest
     //@param questAcceptRequirements: the requirements to accept a quest
     //@param questCompletionRequirements: the requirements to complete a quest
-    public Quest (String name, String description, long cooldown, int questGiverId, int questCompleterId,
+    public Quest (String name, TextComponent[] bookDescription, long cooldown, int questGiverId, int questCompleterId,
                   QuestRewards questRewards, QuestRequirements questAcceptRequirements, QuestRequirements questCompletionRequirements){
         this.name = name;
-        this.description = description;
+        this.bookDescription = bookDescription;
         this.cooldown = cooldown;
         this.questGiverId = questGiverId;
         this.questCompleterId = questCompleterId;
@@ -35,8 +37,8 @@ public class Quest {
     public String getName() {
         return name;
     }
-    public String getDescription() {
-        return description;
+    public TextComponent[] getBookDescription() {
+        return bookDescription;
     }
     public double getCooldown() {
         return cooldown;
