@@ -568,8 +568,6 @@ public class EntityDamagedListener implements Listener {
 
                 //deal the damage
                 defenderPlayer.setHealth((int) (defenderPlayer.getHealth() - finalDefenderDamage));
-                playerDefend.sendMessage("You took " + finalDefenderDamage + " damage from " + playerAttack.getName());
-                playerAttack.sendMessage("You dealt " + finalDefenderDamage + " damage to " + playerDefend.getName());
 
                 //update the player's health bar
                 statsManager.displayActionBar(playerDefend);
