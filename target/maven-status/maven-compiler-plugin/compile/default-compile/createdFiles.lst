@@ -10,6 +10,7 @@ com\stelios\cakenaysh\Listeners\Server\ServerStartupListener$2.class
 com\stelios\cakenaysh\Commands\SetAttributesCommand.class
 com\stelios\cakenaysh\Managers\StashManager.class
 com\stelios\cakenaysh\Util\CustomPlayer$10.class
+com\stelios\cakenaysh\MenuCreation\Menus\SpecifiedQuestInfoMenu.class
 com\stelios\cakenaysh\Util\CustomPlayer$9.class
 com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoMain.class
 com\stelios\cakenaysh\Commands\SetNpcStatCommand.class
@@ -117,10 +118,12 @@ com\stelios\cakenaysh\Listeners\Entity\NpcClickedListener$2.class
 com\stelios\cakenaysh\Listeners\Entity\PlayerInteractListener.class
 com\stelios\cakenaysh\Commands\RecipeCommand.class
 com\stelios\cakenaysh\Managers\PlayerItemManager.class
+com\stelios\cakenaysh\MenuCreation\Menus\QuestCancelMenu.class
 com\stelios\cakenaysh\Npc\Traits\NpcStats.class
 com\stelios\cakenaysh\Listeners\Stats\XpGainListener.class
 com\stelios\cakenaysh\Listeners\Stats\ProficiencyChangedListener.class
 com\stelios\cakenaysh\Commands\HealCommand.class
 com\stelios\cakenaysh\Items\EquipmentBonuses$1.class
+com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoQuests.class
 com\stelios\cakenaysh\Commands\KillCommand.class
 com\stelios\cakenaysh\Util\CustomPlayer$14.class

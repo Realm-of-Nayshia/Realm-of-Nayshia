@@ -77,6 +77,24 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-file</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\target/Cakenaysh-1.0-SNAPSHOT-remapped.jar</sourceFile>
+                            <destinationFile>C:\Users\sd\Desktop\1.20.1 Paper Test Server\plugins\Cakenaysh-1.0-SNAPSHOT-remapped.jar</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>

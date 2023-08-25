@@ -39,6 +39,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\CustomItems.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\QuestManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\UpdateCollectionTabComplete.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoQuests.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Util\CustomPlayer.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\AbilityCreation\CustomAbilities.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\Item.java
@@ -66,9 +67,11 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Server\ServerListPingListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoRecipeDisplay.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Stats\ProficiencyChangedListener.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\QuestCancelMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\PlayerManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\GetAttributesCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Quests\QuestRewards.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\SpecifiedQuestInfoMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoStats.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\GiveItemCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\BattleItem.java
