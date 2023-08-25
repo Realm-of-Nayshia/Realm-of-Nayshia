@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class PlayerInfoSkills extends Menu {
+public class PlayerInfoSkillsMenu extends Menu {
 
-    public PlayerInfoSkills(Player player){
+    public PlayerInfoSkillsMenu(Player player){
         super( Component.text("Your Skills", TextColor.color(0,0,0), TextDecoration.BOLD), 5);
 
         //getting the custom player
@@ -32,7 +32,7 @@ public class PlayerInfoSkills extends Menu {
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoMain(clicked).open(clicked);
+            new PlayerInfoMainMenu(clicked).open(clicked);
         });
 
         registerButton(backButton, 36);
@@ -73,7 +73,7 @@ public class PlayerInfoSkills extends Menu {
                 //add the melee proficiency, subtract the investment points, and update the menu
                 customPlayer.setMeleeProficiency(customPlayer.getMeleeProficiency() + 1);
                 customPlayer.setInvestmentPoints(customPlayer.getInvestmentPoints() - 1);
-                new PlayerInfoSkills(clicked).open(clicked);
+                new PlayerInfoSkillsMenu(clicked).open(clicked);
             }
         });
 
@@ -110,7 +110,7 @@ public class PlayerInfoSkills extends Menu {
                 //add the ranged proficiency, subtract the investment points, and update the menu
                 customPlayer.setRangedProficiency(customPlayer.getRangedProficiency() + 1);
                 customPlayer.setInvestmentPoints(customPlayer.getInvestmentPoints() - 1);
-                new PlayerInfoSkills(clicked).open(clicked);
+                new PlayerInfoSkillsMenu(clicked).open(clicked);
             }
         });
 
@@ -146,7 +146,7 @@ public class PlayerInfoSkills extends Menu {
                 //add the armor proficiency, subtract the investment points, and update the menu
                 customPlayer.setArmorProficiency(customPlayer.getArmorProficiency() + 1);
                 customPlayer.setInvestmentPoints(customPlayer.getInvestmentPoints() - 1);
-                new PlayerInfoSkills(clicked).open(clicked);
+                new PlayerInfoSkillsMenu(clicked).open(clicked);
             }
         });
 
@@ -176,7 +176,7 @@ public class PlayerInfoSkills extends Menu {
             customPlayer.setRangedProficiency(0);
             customPlayer.setArmorProficiency(0);
             customPlayer.setInvestmentPoints(customPlayer.getLevel());
-            new PlayerInfoSkills(clicked).open(clicked);
+            new PlayerInfoSkillsMenu(clicked).open(clicked);
 
             //firing the proficiency changed event
             Bukkit.getPluginManager().callEvent(new ProficiencyChangedEvent(player, "all"));

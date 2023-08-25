@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class PlayerInfoMain extends Menu {
+public class PlayerInfoMainMenu extends Menu {
 
-    public PlayerInfoMain(Player player) {
+    public PlayerInfoMainMenu(Player player) {
 
         //create the menu
         super(Component.text("Navigation", TextColor.color(0,0,0), TextDecoration.BOLD), 5);
@@ -108,28 +108,28 @@ public class PlayerInfoMain extends Menu {
 
         MenuButton statsButton = new MenuButton(combatStats.build());
         statsButton.setWhenClicked(clicked ->
-                new PlayerInfoStats(player).open(clicked));
+                new PlayerInfoStatsMenu(player).open(clicked));
 
         registerButton(statsButton, 20);
 
         //skills button
         MenuButton skillsButton = new MenuButton(CustomItems.SKILLS.getItem().build());
         skillsButton.setWhenClicked(clicked ->
-                new PlayerInfoSkills(player).open(clicked));
+                new PlayerInfoSkillsMenu(player).open(clicked));
 
         registerButton(skillsButton, 21);
 
         //quests button
         MenuButton questsButton = new MenuButton(CustomItems.QUESTS.getItem().build());
         questsButton.setWhenClicked(clicked ->
-                new PlayerInfoQuests(player).open(clicked));
+                new PlayerInfoQuestsMenu(player).open(clicked));
 
         registerButton(questsButton, 23);
 
         //recipe book button
         MenuButton recipeBookButton = new MenuButton(CustomItems.RECIPE_BOOK.getItem().build());
         recipeBookButton.setWhenClicked(clicked ->
-                new PlayerInfoRecipes(player).open(clicked));
+                new PlayerInfoRecipesMenu(player).open(clicked));
 
         registerButton(recipeBookButton, 24);
 

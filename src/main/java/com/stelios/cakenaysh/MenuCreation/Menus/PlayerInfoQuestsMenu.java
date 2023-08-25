@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class PlayerInfoQuests extends Menu {
+public class PlayerInfoQuestsMenu extends Menu {
 
-    public PlayerInfoQuests (Player player) {
+    public PlayerInfoQuestsMenu(Player player) {
         super(Component.text("Quests", TextColor.color(0,0,0), TextDecoration.BOLD), 1);
 
         Main main = Main.getPlugin(Main.class);
@@ -28,7 +28,7 @@ public class PlayerInfoQuests extends Menu {
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoMain(clicked).open(clicked);
+            new PlayerInfoMainMenu(clicked).open(clicked);
         });
         registerButton(backButton, 0);
 

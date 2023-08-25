@@ -28,7 +28,7 @@ public class SpecifiedQuestInfoMenu extends Menu {
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoQuests(clicked).open(clicked);
+            new PlayerInfoQuestsMenu(clicked).open(clicked);
         });
         registerButton(backButton, 18);
 

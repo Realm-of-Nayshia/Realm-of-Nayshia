@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class PlayerInfoStats extends Menu {
+public class PlayerInfoStatsMenu extends Menu {
 
-    public PlayerInfoStats(Player player) {
+    public PlayerInfoStatsMenu(Player player) {
         super(Component.text( "Your Combat Stats", TextColor.color(0,0,0), TextDecoration.BOLD), 6);
 
         //getting the custom player
@@ -28,7 +28,7 @@ public class PlayerInfoStats extends Menu {
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoMain(clicked).open(clicked);
+            new PlayerInfoMainMenu(clicked).open(clicked);
         });
 
         registerButton(backButton, 45);

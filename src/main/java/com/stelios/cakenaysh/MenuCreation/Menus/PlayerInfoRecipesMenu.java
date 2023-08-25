@@ -12,9 +12,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class PlayerInfoRecipes extends Menu {
+public class PlayerInfoRecipesMenu extends Menu {
 
-    public PlayerInfoRecipes(Player player) {
+    public PlayerInfoRecipesMenu(Player player) {
         super(Component.text("Recipes", TextColor.color(0,0,0), TextDecoration.BOLD), 6);
 
         ////registering unclickable buttons
@@ -37,7 +37,7 @@ public class PlayerInfoRecipes extends Menu {
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoMain(clicked).open(clicked);
+            new PlayerInfoMainMenu(clicked).open(clicked);
         });
         registerButton(backButton, 45);
 
@@ -62,7 +62,7 @@ public class PlayerInfoRecipes extends Menu {
                     //create a button for the recipe
                     MenuButton recipeButton = new MenuButton(recipe.getRecipe().getResult());
                     recipeButton.setWhenClicked(clicked -> {
-                        new PlayerInfoRecipeDisplay(recipe).open(clicked);
+                        new PlayerInfoRecipeDisplayMenu(recipe).open(clicked);
                     });
 
                     //loop through the inventory slots

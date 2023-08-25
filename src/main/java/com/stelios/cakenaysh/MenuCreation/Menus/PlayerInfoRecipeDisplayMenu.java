@@ -11,16 +11,16 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
-public class PlayerInfoRecipeDisplay extends Menu {
+public class PlayerInfoRecipeDisplayMenu extends Menu {
 
-    public PlayerInfoRecipeDisplay(Recipes recipe) {
+    public PlayerInfoRecipeDisplayMenu(Recipes recipe) {
         super(Component.text("Recipes", TextColor.color(0,0,0), TextDecoration.BOLD), 6);
 
         ////registering clickable buttons
         //back button
         MenuButton backButton = new MenuButton(CustomItems.BACK_BUTTON.getItem().build());
         backButton.setWhenClicked(clicked -> {
-            new PlayerInfoRecipes(clicked).open(clicked);
+            new PlayerInfoRecipesMenu(clicked).open(clicked);
         });
         registerButton(backButton, 45);
 
