@@ -56,34 +56,30 @@ public class NpcClickedListener implements Listener {
             //get the quest
             Quest quest = main.getQuestManager().getQuestFromName(trait.getQuestName());
 
-            //if the npc is the quest completer and the player has the quest active
-            if (quest.getQuestCompleterId() == npc.getId() && main.getQuestManager().hasQuestActive(player, quest)) {
+            //if the npc is the quest completer and the player can complete the quest
+            if (quest.getQuestCompleterId() == npc.getId() && main.getQuestManager().canCompleteQuest(player, quest)) {
 
-                //if the player can complete the quest
-                if (main.getQuestManager().canCompleteQuest(player, quest)) {
+                //set the npc to speaking
+                trait.setSpeaking(true);
 
-                    //set the npc to speaking
-                    trait.setSpeaking(true);
+                //send the npc's complete text with a delay between each message
+                new BukkitRunnable() {
+                    int i = 0;
+                    @Override
+                    public void run() {
 
-                    //send the npc's complete text with a delay between each message
-                    new BukkitRunnable() {
-                        int i = 0;
-                        @Override
-                        public void run() {
+                        //complete the quest
+                        main.getQuestManager().completeQuest(player, quest);
 
-                            //complete the quest
-                            main.getQuestManager().completeQuest(player, quest);
-
-                            //send the npc's complete text
-                            player.sendMessage(trait.getCompletedText().get(i));
-                            i++;
-                            if (i >= trait.getCompletedText().size()) {
-                                trait.setSpeaking(false);
-                                cancel();
-                            }
+                        //send the npc's complete text
+                        player.sendMessage(trait.getCompletedText().get(i));
+                        i++;
+                        if (i >= trait.getCompletedText().size()) {
+                            trait.setSpeaking(false);
+                            cancel();
                         }
-                    }.runTaskTimer(main, 0, 15);
-                }
+                    }
+                }.runTaskTimer(main, 0, 15);
 
             //if the npc is the quest giver
             } else if (quest.getQuestGiverId() == npc.getId()) {
