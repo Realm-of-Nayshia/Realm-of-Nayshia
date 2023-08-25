@@ -55,7 +55,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
 
         //check if Citizens is present and enabled.
-        if(getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled()) {
+        if(getServer().getPluginManager().getPlugin("Citizens") == null || !Objects.requireNonNull(getServer().getPluginManager().getPlugin("Citizens")).isEnabled()) {
             getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
             getServer().getPluginManager().disablePlugin(this);
             return;

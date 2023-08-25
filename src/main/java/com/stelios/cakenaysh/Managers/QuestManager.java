@@ -92,7 +92,7 @@ public class QuestManager {
     }
 
 
-    //set a quest to active
+    //change a quest status for the target player
     public void setQuestStatus (Player player, Quest quest, String status){
 
         //make sure the player has a quest file
@@ -109,6 +109,9 @@ public class QuestManager {
         ArrayList<String> questStatus = getQuestStatuses(player);
         questStatus.set(getQuestInfo(player).indexOf(quest.getName()), status);
         quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("questStatus", questStatus)));
+
+        //recalculate the player's active quest count
+        recalculateQuestCount(player);
 
         //update the quest statuses
         updateQuestStatus(player);
@@ -181,6 +184,30 @@ public class QuestManager {
 
         //update the quest statuses
         quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("questStatus", questStatus)));
+    }
+
+
+    //recalculate the player's active quest count
+    public void recalculateQuestCount (Player player) {
+
+        //make sure the player has a quest file
+        if (!hasQuestFile(player)) {
+            return;
+        }
+
+        //get the player's quest file
+        ArrayList<String> questStatus = getQuestStatuses(player);
+
+        //loop through all the quests
+        int activeQuestCount = 0;
+        for (String questStatuses : questStatus) {
+            if (questStatuses.equals("active")) {
+                activeQuestCount++;
+            }
+        }
+
+        //update the database
+        quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("activeQuestCount", activeQuestCount)));
     }
 
 
