@@ -35,7 +35,9 @@ public class NpcStats extends Trait {
     @Persist("rangedDamage") float rangedDamage = 0.0f;
     @Persist("magicDefense") float magicDefense = 0.0f;
     @Persist("magicDamage") float magicDamage = 0.0f;
+    @Persist("faction") String faction = "None";
     @Persist("playerDamages") HashMap<UUID, Float> playerDamages = new HashMap<>();
+
 
     //getters
     public float getXp() {
@@ -95,9 +97,13 @@ public class NpcStats extends Trait {
     public float getMagicDamage() {
         return magicDamage;
     }
+    public String getFaction() {
+        return faction;
+    }
     public HashMap<UUID, Float> getPlayerDamages() {
         return playerDamages;
     }
+
 
     //setting a player's damage
     public void addPlayerDamage(UUID uuid, float damage){
@@ -112,10 +118,12 @@ public class NpcStats extends Trait {
         }
     }
 
+
     //clearing player's data
     public void clearPlayerDamages(){
         playerDamages.clear();
     }
+
 
     //setting a stat
     public void setStat(String name, float value){
@@ -142,6 +150,13 @@ public class NpcStats extends Trait {
         }
     }
 
+
+    //setting the faction
+    public void setFaction(String faction) {
+        this.faction = faction;
+    }
+
+
     //resetting all stats
     public void resetStats(){
         xp = 0.0f;
@@ -163,6 +178,7 @@ public class NpcStats extends Trait {
         rangedDamage = 0.0f;
         magicDefense = 0.0f;
         magicDamage = 0.0f;
+        faction = "None";
         clearPlayerDamages();
     }
 

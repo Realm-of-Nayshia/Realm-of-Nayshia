@@ -36,6 +36,27 @@ public class SetNpcStatCommand implements CommandExecutor {
                         //get the NpcStats trait
                         NpcStats npcStats = npc.getOrAddTrait(NpcStats.class);
 
+                        //if the stat is the faction
+                        if (args[0].equalsIgnoreCase("faction")) {
+
+                            //if the value is a valid faction
+                            if (Arrays.asList("None", "Vinlonya", "Kano", "Hejlorn", "Uberwald", "Chengshi", "Jiangshi", "Pirate", "Tesacacoatl",
+                                    "Lapulapu", "Concuevo", "Menoa", "Stollberg", "LoneCanyon").contains(args[1])) {
+
+                                //set the faction
+                                npcStats.setFaction(args[1]);
+
+                                //success
+                                sender.sendMessage(Component.text("Successfully set faction to " + args[1] + ".", TextColor.color(0, 255, 0)));
+                                return true;
+
+                            } else {
+                                //error: invalid faction
+                                sender.sendMessage(Component.text("Invalid faction.", TextColor.color(255, 0, 0)));
+                                return false;
+                            }
+                        }
+
                         //if the stat is valid
                         if (Arrays.asList("xp","critdamage","critchance","strength","thorns","defense","infernaldefense","infernaldamage","undeaddefense",
                                 "undeaddamage","aquaticdefense","aquaticdamage","aerialdefense","aerialdamage","meleedefense",
