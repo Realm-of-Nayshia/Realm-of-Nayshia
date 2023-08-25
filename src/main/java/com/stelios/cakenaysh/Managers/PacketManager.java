@@ -72,6 +72,7 @@ public class PacketManager {
             field.setAccessible(true);
             connection = (Connection) field.get(serverGamePacketListener);
         } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return connection;
