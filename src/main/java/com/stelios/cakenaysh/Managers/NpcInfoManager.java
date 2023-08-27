@@ -128,8 +128,7 @@ public class NpcInfoManager {
         }
 
         //update the npc's document
-        Document update = new Document("name", npc.getName()).append("equipment", equipment).append("stats", stats)
-                .append("drops", drops).append("killed", new GsonBuilder().create().toJson(new HashMap<String, Double>()));
+        Document update = new Document("name", npc.getName()).append("equipment", equipment).append("stats", stats).append("drops", drops);
         npcInfo.updateOne(new Document("uuid", npc.getUniqueId().toString()), new Document("$set", update));
     }
 
