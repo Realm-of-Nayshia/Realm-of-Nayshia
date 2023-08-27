@@ -1,5 +1,6 @@
 package com.stelios.cakenaysh.Managers;
 
+import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.stelios.cakenaysh.Items.Item;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class QuestManager {
 
@@ -78,6 +80,10 @@ public class QuestManager {
         return getActiveQuests(player).contains(quest.getName());
     }
 
+    //if the player has the specified quest completed
+    public boolean hasQuestCompleted(Player player, Quest quest){
+        return getQuestStatuses(player).get(getQuestInfo(player).indexOf(quest.getName())).equals("completed");
+    }
 
     //if the player can complete the specified quest
     public boolean canCompleteQuest (Player player, Quest quest) {
@@ -139,7 +145,16 @@ public class QuestManager {
         ArrayList<Date> questLastCompleted = getQuestLastCompleted(player);
         questTimesCompleted.set(getQuestInfo(player).indexOf(quest.getName()), questTimesCompleted.get(getQuestInfo(player).indexOf(quest.getName())) + 1);
         questLastCompleted.set(getQuestInfo(player).indexOf(quest.getName()), new Date());
-        setQuestStatus(player, quest, "locked");
+
+        //if the quest is a one time quest, set the quest to completed
+        if (quest.getCooldown() < 0) {
+            setQuestStatus(player, quest, "completed");
+
+        //else, set the quest to locked
+        } else {
+            setQuestStatus(player, quest, "locked");
+        }
+
         quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("questTimesCompleted", questTimesCompleted)));
         quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("questLastCompleted", questLastCompleted)));
 
@@ -279,7 +294,7 @@ public class QuestManager {
         for (String npcUUID : requiredNpcKills.keySet()) {
 
             //get the player's npc kills
-            HashMap<String, Integer> npcKills = main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first().get("killed", HashMap.class);
+            HashMap<String, Double> npcKills = new GsonBuilder().create().fromJson((Objects.requireNonNull(main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first())).get("killed").toString(), HashMap.class);
 
             //if the player hasn't killed the npc at all, return false
             if (!npcKills.containsKey(player.getName())) {
@@ -363,8 +378,13 @@ public class QuestManager {
         //loop through all the required npc kills
         for (String npcUUID : requiredNpcKills.keySet()) {
 
+            //if the npc doesn't have an info document, return false
+            if (main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first() == null){
+                return false;
+            }
+
             //get the player's npc kills
-            HashMap<String, Integer> npcKills = main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first().get("killed", HashMap.class);
+            HashMap<String, Double> npcKills = new GsonBuilder().create().fromJson((Objects.requireNonNull(main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first())).get("killed").toString(), HashMap.class);
 
             //if the player hasn't killed the npc at all, return false
             if (!npcKills.containsKey(player.getName())) {

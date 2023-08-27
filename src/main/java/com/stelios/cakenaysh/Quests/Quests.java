@@ -34,7 +34,10 @@ public enum Quests {
                     }}),
             new QuestRequirements(new ArrayList<>(), false, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
             new QuestRequirements(new ArrayList<>(Collections.singletonList(CustomItems.WRATH_OF_SPARTA.getItem())),
-                    false, new HashMap<>(), new ArrayList<>(), new HashMap<>())))
+                    false, new HashMap<>(), new ArrayList<>(),
+                    new HashMap<>() {{
+                            put("047840ab-94f7-4003-985d-24dfa7ce5ea8", 3);
+                    }})))
 
     ;
 
