@@ -40,7 +40,7 @@ public class NpcInfoManager {
                     .append("equipment", new ArrayList<String>())
                     .append("stats", new LinkedHashMap<String, Float>())
                     .append("drops", new HashMap<String, Double>())
-                    .append("killed", new HashMap<String, Integer>()));
+                    .append("killed", new GsonBuilder().create().toJson(new HashMap<String, Double>())));
         }
 
         //get the npc's equipment
@@ -128,7 +128,8 @@ public class NpcInfoManager {
         }
 
         //update the npc's document
-        Document update = new Document("name", npc.getName()).append("equipment", equipment).append("stats", stats).append("drops", drops);
+        Document update = new Document("name", npc.getName()).append("equipment", equipment).append("stats", stats)
+                .append("drops", drops).append("killed", new GsonBuilder().create().toJson(new HashMap<String, Double>()));
         npcInfo.updateOne(new Document("uuid", npc.getUniqueId().toString()), new Document("$set", update));
     }
 
@@ -150,11 +151,8 @@ public class NpcInfoManager {
             updateNpcInfo(npc);
         }
 
-        //create a new gson
-        GsonBuilder gsonBuilder = new GsonBuilder();
-
         //get the player's npc kill count
-        HashMap<String, Integer> killed = gsonBuilder.create().fromJson(npcInfo.find(new Document("uuid", npcUUID)).first().get("killed").toString(), HashMap.class);
+        HashMap<String, Double> killed = new GsonBuilder().create().fromJson(Objects.requireNonNull(npcInfo.find(new Document("uuid", npcUUID)).first()).get("killed").toString(), HashMap.class);
 
         //if the player has killed the npc before
         if (killed.containsKey(playerName)){
@@ -166,11 +164,11 @@ public class NpcInfoManager {
         } else {
 
             //add the npc to the player's npc kill count
-            killed.put(playerName, 1);
+            killed.put(playerName, 1.0);
         }
 
         //update the player's npc kill count
-        Document update = new Document("killed", killed);
+        Document update = new Document("killed", new GsonBuilder().create().toJson(killed));
         npcInfo.updateOne(new Document("uuid", npcUUID), new Document("$set", update));
     }
 }

@@ -22,6 +22,7 @@ com\stelios\cakenaysh\MenuCreation\MenuButton.class
 com\stelios\cakenaysh\Commands\GetNpcStatsCommand.class
 com\stelios\cakenaysh\Listeners\Inventory\InventoryAlteredListener.class
 com\stelios\cakenaysh\Listeners\Entity\PlayerAdvancementCompletedListener.class
+com\stelios\cakenaysh\Quests\Quests$2.class
 com\stelios\cakenaysh\AbilityCreation\CustomAbilities.class
 com\stelios\cakenaysh\Commands\TabComplete\ResetAttributesTabComplete.class
 com\stelios\cakenaysh\Managers\MenuManager.class
@@ -49,6 +50,7 @@ com\stelios\cakenaysh\Quests\QuestRequirements.class
 com\stelios\cakenaysh\Npc\Traits\NpcQuest.class
 com\stelios\cakenaysh\AbilityCreation\Abilities\WrathOfSpartaAbility$1.class
 com\stelios\cakenaysh\Items\EquipmentBonuses.class
+com\stelios\cakenaysh\Listeners\Entity\NpcClickedListener$5.class
 com\stelios\cakenaysh\Listeners\Server\ConnectionListener.class
 com\stelios\cakenaysh\Items\ConsumableItem$1.class
 com\stelios\cakenaysh\Util\CustomPlayer$7.class
