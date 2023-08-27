@@ -62,6 +62,22 @@ commands:
     description: Set the specified quest linked to the npc.
     syntax: /npcquest <quest>
     permission: op
+  questResponse:
+    description: Sets the response of the npc for the specified quest.
+    syntax: /questresponse <textType> <index> <response>
+    permission: op
+  questResponseSize:
+    description: Sets the size of the npc's response for each text type for the specified quest.
+    syntax: /questResponseSize <textType> <size>
+    permission: op
+  questResponseGet:
+    description: Gets the response of the npc for the specified quest.
+    syntax: /questResponseGet <textType>
+    permission: op
+  questResponseReset:
+    description: Resets the response of the npc for the specified quest.
+    syntax: /questResponseReset <textType>
+    permission: op
   menu:
     description: Opens the rpg menu.
     syntax: /menu

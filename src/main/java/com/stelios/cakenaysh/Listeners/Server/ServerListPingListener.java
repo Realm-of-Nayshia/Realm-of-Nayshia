@@ -15,7 +15,7 @@ public class ServerListPingListener implements Listener {
     @EventHandler
     public void onPing(ServerListPingEvent e){
 
-        e.setMaxPlayers(10);
+        e.setMaxPlayers(100);
         e.motd(Component.text("This is a test server!",
                         TextColor.color(0,150,255))
                 .decoration(TextDecoration.BOLD, true));

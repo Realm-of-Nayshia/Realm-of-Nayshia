@@ -3,6 +3,7 @@ com\stelios\cakenaysh\Util\CustomPlayer$13.class
 com\stelios\cakenaysh\Listeners\Server\ServerStartupListener.class
 com\stelios\cakenaysh\Quests\Quests.class
 com\stelios\cakenaysh\MenuCreation\Menus\QuestAcceptMenu.class
+com\stelios\cakenaysh\Commands\QuestResponseResetCommand.class
 com\stelios\cakenaysh\Commands\SetNpcQuestCommand.class
 com\stelios\cakenaysh\Util\CustomPlayer$1.class
 com\stelios\cakenaysh\Commands\MenuCommand.class
@@ -38,6 +39,7 @@ com\stelios\cakenaysh\Managers\PacketManager.class
 com\stelios\cakenaysh\Listeners\Entity\NpcClickedListener$4.class
 com\stelios\cakenaysh\MenuCreation\Menu.class
 com\stelios\cakenaysh\Listeners\Entity\NpcClickedListener.class
+com\stelios\cakenaysh\Commands\TabComplete\QuestResponseTypeTabComplete.class
 com\stelios\cakenaysh\Listeners\Server\ServerStartupListener$1.class
 com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoStatsMenu.class
 com\stelios\cakenaysh\Util\CustomPlayer$18.class
@@ -105,7 +107,9 @@ com\stelios\cakenaysh\Items\EquipmentBonuses$2.class
 com\stelios\cakenaysh\Items\ConsumableItem.class
 com\stelios\cakenaysh\Managers\PacketManager$1.class
 com\stelios\cakenaysh\Commands\TabComplete\SetNpcStatTabComplete.class
+com\stelios\cakenaysh\Commands\QuestResponseGetCommand.class
 com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoQuestsMenu.class
+com\stelios\cakenaysh\Commands\QuestResponseCommand.class
 com\stelios\cakenaysh\Util\Database.class
 com\stelios\cakenaysh\Commands\VanishCommand.class
 com\stelios\cakenaysh\Managers\StatsManager.class
@@ -121,10 +125,12 @@ com\stelios\cakenaysh\Commands\RecipeCommand.class
 com\stelios\cakenaysh\Managers\PlayerItemManager.class
 com\stelios\cakenaysh\MenuCreation\Menus\QuestCancelMenu.class
 com\stelios\cakenaysh\Npc\Traits\NpcStats.class
+com\stelios\cakenaysh\Commands\TabComplete\QuestResponseTabComplete.class
 com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoRecipeDisplayMenu.class
 com\stelios\cakenaysh\Listeners\Stats\XpGainListener.class
 com\stelios\cakenaysh\Listeners\Stats\ProficiencyChangedListener.class
 com\stelios\cakenaysh\Commands\HealCommand.class
+com\stelios\cakenaysh\Commands\QuestResponseSizeCommand.class
 com\stelios\cakenaysh\Items\EquipmentBonuses$1.class
 com\stelios\cakenaysh\Commands\KillCommand.class
 com\stelios\cakenaysh\Util\CustomPlayer$14.class

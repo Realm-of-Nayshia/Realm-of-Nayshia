@@ -35,8 +35,18 @@ public class NpcClickedListener implements Listener {
 
     private void questLogic(Player player, NPC npc) {
 
-        //get the npc name
-        String npcName = npc.getName();
+        //get the npc names
+        String fullNpcName = npc.getFullName();
+        String npcName = "[" + npc.getName() + "]: ";
+
+        //take the color codes from the full name and add them to the start of the npc name
+        for (int i = 0; i < fullNpcName.length(); i++) {
+            if (fullNpcName.charAt(i) == '§') {
+                npcName = ("§" + fullNpcName.charAt(i + 1)).concat(npcName);
+            }
+        }
+
+        String finalNpcName = npcName.concat("§r");
 
         //if the npc has the NpcQuest trait
         if (npc.hasTrait(NpcQuest.class)) {
@@ -72,7 +82,7 @@ public class NpcClickedListener implements Listener {
                         main.getQuestManager().completeQuest(player, quest);
 
                         //send the npc's complete text
-                        player.sendMessage(trait.getCompletedText().get(i));
+                        player.sendMessage(finalNpcName.concat(trait.getCompletedText().get(i)));
                         i++;
                         if (i >= trait.getCompletedText().size()) {
                             trait.setSpeaking(false);
@@ -98,7 +108,8 @@ public class NpcClickedListener implements Listener {
                             int i = 0;
                             @Override
                             public void run() {
-                                player.sendMessage(trait.getLockedText().get(i));
+
+                                player.sendMessage(finalNpcName.concat(trait.getLockedText().get(i)));
                                 i++;
                                 if (i >= trait.getLockedText().size()) {
                                     trait.setSpeaking(false);
@@ -111,7 +122,7 @@ public class NpcClickedListener implements Listener {
                     } else if (!main.getQuestManager().canAcceptQuest(player, quest, true)) {
 
                         //send that the player is at max quests
-                        player.sendMessage(Component.text("[" + npcName + "] -> I need some help, but you seem to already have your hands full."));
+                        player.sendMessage(Component.text(finalNpcName + "I need some help, but you seem to already have your hands full."));
 
                     //if the player can accept the quest
                     } else if (main.getQuestManager().canAcceptQuest(player, quest, true)) {
@@ -124,7 +135,8 @@ public class NpcClickedListener implements Listener {
                             int i = 0;
                             @Override
                             public void run() {
-                                player.sendMessage(trait.getUnlockedText().get(i));
+
+                                player.sendMessage(finalNpcName.concat(trait.getUnlockedText().get(i)));
                                 i++;
                                 if (i >= trait.getUnlockedText().size()) {
 
@@ -149,7 +161,8 @@ public class NpcClickedListener implements Listener {
                         int i = 0;
                         @Override
                         public void run() {
-                            player.sendMessage(trait.getActiveText().get(i));
+
+                            player.sendMessage(finalNpcName + trait.getActiveText().get(i));
                             i++;
                             if (i >= trait.getActiveText().size()) {
                                 trait.setSpeaking(false);

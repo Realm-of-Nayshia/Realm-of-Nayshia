@@ -13,6 +13,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\GetNpcStatsCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\PlayerItemManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\GetAttributesTabComplete.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\QuestResponseCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\AbilityCreation\ItemAbility.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\MenuListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\ResetAttributesTabComplete.java
@@ -29,6 +30,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoSkillsMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\AddAttributesCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\SetAttributesCommand.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\QuestResponseTypeTabComplete.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\ResetNpcStatsCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\ConsumableItem.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Server\ConnectionListener.java
@@ -43,6 +45,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Util\CustomPlayer.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\AbilityCreation\CustomAbilities.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Items\Item.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\QuestResponseGetCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\SetNpcStatTabComplete.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Entity\PlayerDiscoverRecipeEvent.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\SetNpcQuestCommand.java
@@ -59,6 +62,7 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Entity\PlayerStatusChangeListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Npc\Traits\NpcStats.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\StatsManager.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\QuestResponseSizeCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Inventory\InventoryAlteredListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\HealCommand.java
@@ -68,8 +72,10 @@ C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Server\ServerListPingListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Listeners\Stats\ProficiencyChangedListener.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\QuestCancelMenu.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\TabComplete\QuestResponseTabComplete.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Managers\PlayerManager.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\GetAttributesCommand.java
+C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Commands\QuestResponseResetCommand.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\Quests\QuestRewards.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\SpecifiedQuestInfoMenu.java
 C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\src\main\java\com\stelios\cakenaysh\MenuCreation\Menus\PlayerInfoStatsMenu.java
