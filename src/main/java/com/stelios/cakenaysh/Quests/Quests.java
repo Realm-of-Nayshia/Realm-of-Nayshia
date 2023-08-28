@@ -6,10 +6,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 public enum Quests {
 
@@ -26,21 +23,23 @@ public enum Quests {
                     .append(Component.text("hello\n", TextColor.color(255,0,0), TextDecoration.BOLD, TextDecoration.OBFUSCATED))
                     .append(Component.text("|------------------|"))}
             , 10L, 11, 11,
-            new QuestRewards(100, new ArrayList<>(Collections.singletonList(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
+            new QuestRewards(100, new ArrayList<>(Collections.singleton(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
                     new HashMap<>() {{
                         put("maxHealth", 10);
                         put("maxStamina", 1);
                         put("stealth", 1);
                         put("wilsonCoin", 100);
                     }}),
-            new QuestRequirements(new ArrayList<>(), true, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
-            new QuestRequirements(new ArrayList<>(Collections.singletonList(CustomItems.WRATH_OF_SPARTA.getItem())),
+            new QuestRequirements(new ArrayList<>(List.of("Wrath of Sparta")), true, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
+            new QuestRequirements(new ArrayList<>(List.of("Wrath of Sparta")),
                     true, new HashMap<>(), new ArrayList<>(),
                     new HashMap<>() {{
                         //Azariah and Guibous
                             put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",
-                                    "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 3);
-                    }})))
+                                    "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 1);
+                    }}))),
+
+
 
     ;
 

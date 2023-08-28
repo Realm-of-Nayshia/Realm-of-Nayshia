@@ -3,13 +3,15 @@ package com.stelios.cakenaysh.Managers;
 import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import com.stelios.cakenaysh.Items.Item;
 import com.stelios.cakenaysh.Main;
 import com.stelios.cakenaysh.Quests.Quest;
 import com.stelios.cakenaysh.Quests.Quests;
 import com.stelios.cakenaysh.Util.CustomPlayer;
 import org.bson.Document;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,7 +123,7 @@ public class QuestManager {
 
             //take the items from the player if the quest requires it
             if (quest.getQuestAcceptRequirements().takeItems()) {
-                main.getPlayerInventoryManager().removeItemsFromInventory(player, quest.getQuestAcceptRequirements().getItems());
+                main.getPlayerInventoryManager().removeItemsWithNameFromInventory(player, quest.getQuestAcceptRequirements().getItems());
             }
         }
 
@@ -153,7 +155,7 @@ public class QuestManager {
 
         //take the required items from the player
         if (quest.getQuestCompletionRequirements().takeItems()) {
-            main.getPlayerInventoryManager().removeItemsFromInventory(player, quest.getQuestCompletionRequirements().getItems());
+            main.getPlayerInventoryManager().removeItemsWithNameFromInventory(player, quest.getQuestCompletionRequirements().getItems());
         }
 
         //complete the quest
@@ -258,9 +260,9 @@ public class QuestManager {
             return false;
         }
 
-        //if the player has the required amount of active quests, items, stats, quests, and cooldown, return true
-        return !hasItemsToAccept(player, quest) || !hasStatsToAccept(player, quest) || !hasRequiredQuestsCompleted(player, quest)
-                || !hasNpcsKillsToAccept(player, quest) || !(new Date().getTime() - getQuestLastCompleted(player).get(getQuestInfo(player).indexOf(quest.getName())).getTime() < quest.getCooldown());
+        //if the player has the required amount of quests, items, stats, quests, and cooldown, return true
+        return hasItemsToAccept(player, quest) && hasStatsToAccept(player, quest) && hasRequiredQuestsCompleted(player, quest)
+                && hasNpcsKillsToAccept(player, quest) || (new Date().getTime() - getQuestLastCompleted(player).get(getQuestInfo(player).indexOf(quest.getName())).getTime() < quest.getCooldown());
     }
 
 
@@ -268,18 +270,35 @@ public class QuestManager {
     public boolean hasItemsToAccept(Player player, Quest quest) {
 
         //get the required items
-        ArrayList<Item> requiredItems = quest.getQuestAcceptRequirements().getItems();
+        ArrayList<String> requiredItemNames = quest.getQuestAcceptRequirements().getItems();
 
-        //loop through all the required items
-        for (Item item : requiredItems) {
+        //get the items in the player's inventory
+        ItemStack[] playerItems = player.getInventory().getContents();
 
-            //if the player doesn't have the required item, return false
-            if (!player.getInventory().contains(item.getItemStack())) {
-                return false;
+        //get the number of required items obtained
+        int requiredItemsObtained = 0;
+
+        //loop through all the required item names
+        for (String itemName : requiredItemNames) {
+
+            //loop through all the player's items
+            for (ItemStack item : playerItems) {
+
+                //if the item is null or doesn't have a custom name, continue
+                if (item == null || item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING) == null) {
+                    continue;
+                }
+
+                //if the item's name is the same as the required item name, add one to the required items obtained
+                if (Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING)).equals(itemName)) {
+                    requiredItemsObtained++;
+                    break;
+                }
             }
         }
 
-        return true;
+        //return if the player has the required items
+        return requiredItemsObtained == requiredItemNames.size();
     }
 
 
@@ -370,18 +389,35 @@ public class QuestManager {
     public boolean hasItemsToComplete (Player player, Quest quest) {
 
         //get the required items
-        ArrayList<Item> requiredItems = quest.getQuestCompletionRequirements().getItems();
+        ArrayList<String> requiredItemNames = quest.getQuestCompletionRequirements().getItems();
 
-        //loop through all the required items
-        for (Item item : requiredItems) {
+        //get the items in the player's inventory
+        ItemStack[] playerItems = player.getInventory().getContents();
 
-            //if the player doesn't have the required item, return false
-            if (!player.getInventory().contains(item.getItemStack())) {
-                return false;
+        //get the number of required items obtained
+        int requiredItemsObtained = 0;
+
+        //loop through all the required item names
+        for (String itemName : requiredItemNames) {
+
+            //loop through all the player's items
+            for (ItemStack item : playerItems) {
+
+                //if the item is null or doesn't have a custom name, continue
+                if (item == null || item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING) == null) {
+                    continue;
+                }
+
+                //if the item's name is the same as the required item name, add one to the required items obtained
+                if (Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING)).equals(itemName)) {
+                    requiredItemsObtained++;
+                    break;
+                }
             }
         }
 
-        return true;
+        //return if the player has the required items
+        return requiredItemsObtained == requiredItemNames.size();
     }
 
 

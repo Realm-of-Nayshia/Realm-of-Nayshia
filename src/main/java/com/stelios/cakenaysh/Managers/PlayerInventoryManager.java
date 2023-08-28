@@ -2,9 +2,13 @@ package com.stelios.cakenaysh.Managers;
 
 import com.stelios.cakenaysh.Items.Item;
 import com.stelios.cakenaysh.Main;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PlayerInventoryManager {
 
@@ -44,16 +48,51 @@ public class PlayerInventoryManager {
 
 
     //remove an item from the inventory
-    public void removeItemFromInventory (Player player, Item item) {
-        player.getInventory().remove(item.build());
+    public void removeItemWithNameFromInventory (Player player, String itemName) {
+
+        //get the player's inventory
+        ItemStack[] inventory = player.getInventory().getContents();
+
+        //loop through all the items in the player's inventory
+        for (ItemStack item : inventory) {
+
+            //if the item is null or doesn't have a custom name, continue
+            if (item == null || item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING) == null) {
+                continue;
+            }
+
+            //if the item has the same name as the item name, remove it
+            if (Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING)).equals(itemName)) {
+                player.getInventory().removeItem(item);
+                break;
+            }
+        }
     }
 
     //remove multiple items from the inventory
-    public void removeItemsFromInventory (Player player, ArrayList<Item> items) {
+    public void removeItemsWithNameFromInventory(Player player, ArrayList<String> items) {
 
-        //loop through the items
-        for (Item item : items) {
-            player.getInventory().remove(item.build());
+        //get the player's inventory
+        ItemStack[] inventory = player.getInventory().getContents();
+
+        //loop through all the item names
+        for (String itemName : items) {
+
+            //loop through all the items in the player's inventory
+            for (ItemStack item : inventory) {
+
+                //if the item is null or doesn't have a custom name, continue
+                if (item == null || item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING) == null) {
+                    continue;
+                }
+
+                //if the item has the same name as the item name, remove it
+                if (Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(main, "name"), PersistentDataType.STRING)).equals(itemName)) {
+                    player.getInventory().removeItem(item);
+                    break;
+                }
+            }
         }
+
     }
 }
