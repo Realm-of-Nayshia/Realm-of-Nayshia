@@ -28,7 +28,7 @@ public class ServerStartupListener implements Listener {
     @EventHandler
     public void onStart(ServerLoadEvent e){
 
-        //saving player stats every 30 minutes
+        //saving player stats every hour
         new BukkitRunnable(){
             @Override
             public void run() {
@@ -37,7 +37,7 @@ public class ServerStartupListener implements Listener {
                 statsManager.updateDatabaseStatsAll();
                 main.getServer().sendMessage(Component.text("Player stats saved.", TextColor.color(100,100,100), TextDecoration.ITALIC));
             }
-        }.runTaskTimerAsynchronously(main, 0, 20*1800);
+        }.runTaskTimerAsynchronously(main, 0, 20*3600);
     }
 
 

@@ -72,6 +72,7 @@ com\stelios\cakenaysh\Listeners\Stats\SpeedChangedListener.class
 com\stelios\cakenaysh\Quests\Quests$1.class
 com\stelios\cakenaysh\Npc\NpcBuilder.class
 com\stelios\cakenaysh\AbilityCreation\ItemAbility.class
+com\stelios\cakenaysh\Commands\GetNpcIdCommand.class
 com\stelios\cakenaysh\Managers\CombatManager.class
 com\stelios\cakenaysh\Util\CustomPlayer$8.class
 com\stelios\cakenaysh\Managers\QuestManager.class

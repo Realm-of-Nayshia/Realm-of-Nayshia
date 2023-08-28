@@ -22,11 +22,8 @@ import com.stelios.cakenaysh.Npc.Traits.NpcStats;
 import com.stelios.cakenaysh.Util.Database;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.persistence.ComponentPersister;
-import net.citizensnpcs.api.persistence.PersistenceLoader;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
@@ -175,11 +172,6 @@ public final class Main extends JavaPlugin {
     }
 
     private void registerTraits(){
-
-        //make custom persist serializers in the PersistenceLoader api
-        PersistenceLoader.registerPersistDelegate(TextComponent.class, ComponentPersister.class);
-
-        //register the npc traits
         CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(NpcStats.class).withName("npcstats"));
         CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(NpcQuest.class).withName("npcquest"));
     }
