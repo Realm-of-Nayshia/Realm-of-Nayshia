@@ -236,6 +236,15 @@ public class Item {
         return this;
     }
 
+    //sets the custom model data of the item
+    //@param modelData: The custom model data being set to the item.
+    //@return the Item
+    public Item setCustomModelData(int modelData){
+        this.itemMeta.setCustomModelData(modelData);
+        updateItemMeta();
+        return this;
+    }
+
     //return the created item stack
     public ItemStack build(){
         this.updateItemMeta();

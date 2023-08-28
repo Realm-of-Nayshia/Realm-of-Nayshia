@@ -737,6 +737,51 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
+    KALITSOUNI(new ConsumableItem(Material.BAKED_POTATO, 1, false, "Kalitsouni",
+            4, 4,
+            new String[]{"Speed"},
+            new int[]{50},
+            new int[]{20},
+            new PotionEffect[]{
+                    new PotionEffect(PotionEffectType.REGENERATION, 20 * 20, 0)})
+            .setDisplayName(new ArrayList<>(List.of("Kalitsouni")),
+                    new ArrayList<>(Arrays.asList(240, 211, 132)),
+                    new ArrayList<>(List.of(true)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))
+            .setLore(new ArrayList<>(List.of("Viva la Creta!!!")),
+                    new ArrayList<>(Arrays.asList(128,128,128)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))
+            .setCustomModelData(1)),
+
+    PAGOTINI(new ConsumableItem(Material.COOKED_BEEF, 1, false, "Pagotini",
+            1, 1,
+            new String[]{},
+            new int[]{},
+            new int[]{},
+            new PotionEffect[]{new PotionEffect(PotionEffectType.HUNGER, 5 * 20, 0)})
+            .setDisplayName(new ArrayList<>(List.of("Pagotini")),
+                    new ArrayList<>(Arrays.asList(46, 42, 33)),
+                    new ArrayList<>(List.of(true)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))
+            .setLore(new ArrayList<>(List.of("You just can't stop eating them...")),
+                    new ArrayList<>(Arrays.asList(128,128,128)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))
+            .setCustomModelData(2)),
+
 
     //REGULAR ITEMS
     DIAL_OF_THE_SUN(new Item(Material.CLOCK, 1,true, "Dial of the Sun", null)
