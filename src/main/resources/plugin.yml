@@ -78,6 +78,10 @@ commands:
     description: Resets the response of the npc for the specified quest.
     syntax: /questResponseReset <textType>
     permission: op
+  getNpcId:
+    description: Gets the id of the selected npc.
+    syntax: /getnpcid
+    permission: op
   menu:
     description: Opens the rpg menu.
     syntax: /menu

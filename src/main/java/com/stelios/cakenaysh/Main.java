@@ -165,6 +165,8 @@ public final class Main extends JavaPlugin {
         getCommand("questresponseget").setTabCompleter(new QuestResponseTypeTabComplete());
         getCommand("questresponsereset").setExecutor(new QuestResponseResetCommand());
         getCommand("questresponsereset").setTabCompleter(new QuestResponseTypeTabComplete());
+
+        getCommand("getnpcid").setExecutor(new GetNpcIdCommand());
     }
 
     private void registerAbilities(){
