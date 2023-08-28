@@ -7,6 +7,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public enum Quests {
                     .append(Component.text("I guess manually making these isn't as bad as I thought...\n\n"))
                     .append(Component.text("hello\n", TextColor.color(255,0,0), TextDecoration.BOLD, TextDecoration.OBFUSCATED))
                     .append(Component.text("|------------------|"))}
-            , -1L, 11, 11,
+            , 10L, 11, 11,
             new QuestRewards(100, new ArrayList<>(Collections.singletonList(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
                     new HashMap<>() {{
                         put("maxHealth", 10);
@@ -36,7 +37,9 @@ public enum Quests {
             new QuestRequirements(new ArrayList<>(Collections.singletonList(CustomItems.WRATH_OF_SPARTA.getItem())),
                     false, new HashMap<>(), new ArrayList<>(),
                     new HashMap<>() {{
-                            put("047840ab-94f7-4003-985d-24dfa7ce5ea8", 3);
+                        //Azariah and Guibous
+                            put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",
+                                    "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 3);
                     }})))
 
     ;

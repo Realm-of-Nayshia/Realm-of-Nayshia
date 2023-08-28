@@ -12,14 +12,14 @@ public class QuestRequirements {
     private final boolean takeItems;
     private final HashMap<String, Float> stats;
     private final ArrayList<Quest> quests;
-    private final HashMap<String, Integer> npcKills;
+    private final HashMap<ArrayList<String>, Integer> npcKills;
 
 
     //@param items: the items required to unlock a quest
     //@param takeItems: should the required items be taken to unlock the quest
     //@param stats: the stats required to unlock a quest
     public QuestRequirements(ArrayList<Item> items, boolean takeItems, HashMap<String, Float> stats, ArrayList<Quest> quests,
-                             HashMap<String, Integer> npcKills) {
+                             HashMap<ArrayList<String>, Integer> npcKills) {
         this.items = items;
         this.takeItems = takeItems;
         this.stats = stats;
@@ -40,7 +40,7 @@ public class QuestRequirements {
     public ArrayList<Quest> getQuests() {
         return quests;
     }
-    public HashMap<String, Integer> getNpcKills() {
+    public HashMap<ArrayList<String>, Integer> getNpcKills() {
         return npcKills;
     }
 }

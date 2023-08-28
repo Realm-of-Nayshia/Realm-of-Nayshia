@@ -35,6 +35,7 @@ public class QuestManager {
         ArrayList<String> questStatus = new ArrayList<>();
         ArrayList<Integer> questTimesCompleted = new ArrayList<>();
         ArrayList<Date> questLastCompleted = new ArrayList<>();
+        ArrayList<ArrayList<Double>> startingKillCount = updateStartingKillCount(player);
 
         //add all quests to the quest file
         for (Quests quest : Quests.values()){
@@ -49,7 +50,8 @@ public class QuestManager {
                 .append("questInfo", questName)
                 .append("questStatus", questStatus)
                 .append("questTimesCompleted", questTimesCompleted)
-                .append("questLastCompleted", questLastCompleted));
+                .append("questLastCompleted", questLastCompleted)
+                .append("startingKillCount", startingKillCount));
     }
 
 
@@ -166,6 +168,9 @@ public class QuestManager {
         for (String stat : quest.getQuestRewards().getStats().keySet()) {
             main.getPlayerManager().getCustomPlayer(player.getUniqueId()).addPermanentStat(stat, quest.getQuestRewards().getStats().get(stat));
         }
+
+        //update the startingKillCount
+        updateStartingKillCount(player);
 
         //update the quest statuses
         updateQuestStatus(player);
@@ -288,21 +293,37 @@ public class QuestManager {
     public boolean hasNpcsKillsToAccept(Player player, Quest quest) {
 
         //get the required npc kills
-        HashMap<String, Integer> requiredNpcKills = quest.getQuestAcceptRequirements().getNpcKills();
+        HashMap<ArrayList<String>, Integer> requiredNpcKills = quest.getQuestAcceptRequirements().getNpcKills();
 
-        //loop through all the required npc kills
-        for (String npcUUID : requiredNpcKills.keySet()) {
+        //loop through all the required npc arrays
+        for (ArrayList<String> npcUuidList : requiredNpcKills.keySet()) {
 
-            //get the player's npc kills
-            HashMap<String, Double> npcKills = new GsonBuilder().create().fromJson((Objects.requireNonNull(main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first())).get("killed").toString(), HashMap.class);
+            //total kills
+            int totalKills = 0;
 
-            //if the player hasn't killed the npc at all, return false
-            if (!npcKills.containsKey(player.getName())) {
-                return false;
+            //loop through all the npcs
+            for (String npcUUID : npcUuidList) {
+
+                //if the npc's killed document doesn't exist, continue
+                if (main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first() == null) {
+                    continue;
+                }
+
+                //get the npc's killed document
+                HashMap<String, Double> npcKilled = getNpcKilled(npcUUID);
+
+                //if the player hasn't killed the npc at all, continue;
+                if (!npcKilled.containsKey(player.getName())) {
+                    continue;
+                }
+
+                //add the player's npc kills to the total kills
+                totalKills += npcKilled.get(player.getName());
+
             }
 
-            //if the player hasn't killed the required amount of the npc, return false
-            if (npcKills.get(player.getName()) < requiredNpcKills.get(npcUUID)) {
+            //if the player hasn't killed the required amount of the npcs, return false
+            if (totalKills < requiredNpcKills.get(npcUuidList)) {
                 return false;
             }
         }
@@ -373,31 +394,98 @@ public class QuestManager {
     public boolean hasNpcsKillsToComplete (Player player, Quest quest) {
 
         //get the required npc kills
-        HashMap<String, Integer> requiredNpcKills = quest.getQuestCompletionRequirements().getNpcKills();
+        HashMap<ArrayList<String>, Integer> requiredNpcKills = quest.getQuestCompletionRequirements().getNpcKills();
 
-        //loop through all the required npc kills
-        for (String npcUUID : requiredNpcKills.keySet()) {
+        //loop through all the required npc arrays
+        for (ArrayList<String> npcUuidList : requiredNpcKills.keySet()) {
 
-            //if the npc doesn't have an info document, return false
-            if (main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first() == null){
-                return false;
+            //total kills
+            int totalKills = 0;
+
+            //loop through all the npcs
+            for (String npcUUID : npcUuidList) {
+
+                //if the npc's killed document doesn't exist, continue
+                if (main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first() == null) {
+                    continue;
+                }
+
+                //get the npc's killed document
+                HashMap<String, Double> npcKilled = getNpcKilled(npcUUID);
+
+                //if the player hasn't killed the npc at all, continue
+                if (!npcKilled.containsKey(player.getName())) {
+                    continue;
+                }
+
+                //add the player's npc kills to the total kills
+                totalKills += npcKilled.get(player.getName());
+
             }
 
-            //get the player's npc kills
-            HashMap<String, Double> npcKills = new GsonBuilder().create().fromJson((Objects.requireNonNull(main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first())).get("killed").toString(), HashMap.class);
+            //get the required amount of npcs the player needs to kill
+            double requiredKills = requiredNpcKills.get(npcUuidList);
 
-            //if the player hasn't killed the npc at all, return false
-            if (!npcKills.containsKey(player.getName())) {
-                return false;
+            //get the index of the quest
+            int questIndex = getQuestInfo(player).indexOf(quest.getName());
+
+            //loop through the player's starting kill count for the specified quest
+            for (int j = 0; j < getStartingKillCount(player).get(questIndex).size(); j++) {
+
+                //add the player's starting kill count to the required kills
+                requiredKills += getStartingKillCount(player).get(questIndex).get(j);
             }
 
-            //if the player hasn't killed the required amount of the npc, return false
-            if (npcKills.get(player.getName()) < requiredNpcKills.get(npcUUID)) {
+            //if the player hasn't killed the required amount of the npcs, return false
+            if (totalKills < requiredKills) {
                 return false;
             }
         }
 
         return true;
+    }
+
+
+    //update the active starting kill count for the specified quest
+    public ArrayList<ArrayList<Double>> updateStartingKillCount(Player player) {
+
+        ArrayList<ArrayList<Double>> startingKillCount = new ArrayList<>();
+
+        //add the starting active kill count for each npc
+        ArrayList<Double> killCountActive = new ArrayList<>();
+
+        //loop through all quests
+        for (Quests quest : Quests.values()) {
+
+            //loop through all the npc arrays
+            for (ArrayList<String> npcUuidList : quest.getQuest().getQuestCompletionRequirements().getNpcKills().keySet()) {
+
+                //loop through all the npcs
+                for (String npcUUID : npcUuidList) {
+
+                    //if the npc's killed document doesn't exist, continue
+                    if (main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first() == null) {
+                        continue;
+                    }
+
+                    //get the npc's killed document
+                    HashMap<String, Double> npcKilled = getNpcKilled(npcUUID);
+
+                    //set the kill count to the number of times the player has killed the npc
+                    killCountActive.add(npcKilled.getOrDefault(player.getName(), 0.0));
+                }
+            }
+
+            startingKillCount.add(killCountActive);
+        }
+
+        //update the database if it exists
+        if (!hasQuestFile(player)) {
+            return startingKillCount;
+        }
+        quests.updateOne(Filters.eq("uuid", player.getUniqueId().toString()), new Document("$set", new Document("startingKillCount", startingKillCount)));
+
+        return startingKillCount;
     }
 
 
@@ -430,6 +518,12 @@ public class QuestManager {
     }
     public ArrayList<Date> getQuestLastCompleted(Player player){
         return (ArrayList<Date>) quests.find(new Document("uuid", player.getUniqueId().toString())).first().get("questLastCompleted");
+    }
+    public ArrayList<ArrayList<Double>> getStartingKillCount(Player player){
+        return (ArrayList<ArrayList<Double>>) quests.find(new Document("uuid", player.getUniqueId().toString())).first().get("startingKillCount");
+    }
+    public HashMap<String, Double> getNpcKilled(String npcUUID) {
+        return new GsonBuilder().create().fromJson(Objects.requireNonNull(main.getDatabase().getNpcInfo().find(new Document("uuid", npcUUID)).first()).get("killed").toString(), HashMap.class);
     }
 
 }
