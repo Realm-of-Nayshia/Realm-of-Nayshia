@@ -43,6 +43,27 @@ public class StatsManager {
     }
 
 
+    //remove all the player's item stats
+    public void removeItemStats(Player player) {
+        removePlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
+        removePlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
+        removePlayerStats(player, player.getInventory().getHelmet(), "helmet");
+        removePlayerStats(player, player.getInventory().getChestplate(), "chestplate");
+        removePlayerStats(player, player.getInventory().getLeggings(), "leggings");
+        removePlayerStats(player, player.getInventory().getBoots(), "boots");
+    }
+
+
+    //add all the player's item stats
+    public void addItemStats(Player player) {
+        addPlayerStats(player, player.getInventory().getItemInMainHand(), "weapon");
+        addPlayerStats(player, player.getInventory().getItemInOffHand(), "accessory");
+        addPlayerStats(player, player.getInventory().getHelmet(), "helmet");
+        addPlayerStats(player, player.getInventory().getChestplate(), "chestplate");
+        addPlayerStats(player, player.getInventory().getLeggings(), "leggings");
+        addPlayerStats(player, player.getInventory().getBoots(), "boots");
+    }
+
     //update every player's database stats
     public void updateDatabaseStatsAll(){
 
@@ -51,8 +72,14 @@ public class StatsManager {
 
             CustomPlayer customPlayer = main.getPlayerManager().getCustomPlayer(player.getUniqueId());
 
+            //remove all player item stats
+            removeItemStats(player);
+
             //save the player's stats to the database
             customPlayer.saveAttributesToDatabase(player);
+
+            //add all player item stats
+            addItemStats(player);
         }
     }
 
@@ -62,8 +89,14 @@ public class StatsManager {
 
         CustomPlayer customPlayer = main.getPlayerManager().getCustomPlayer(player.getUniqueId());
 
+        //remove all player item stats
+        removeItemStats(player);
+
         //save the player's stats to the database
         customPlayer.saveAttributesToDatabase(player);
+
+        //add all player item stats
+        addItemStats(player);
     }
 
 
