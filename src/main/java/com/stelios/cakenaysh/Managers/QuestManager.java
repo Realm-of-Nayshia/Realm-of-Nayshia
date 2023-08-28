@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -262,7 +263,7 @@ public class QuestManager {
 
         //if the player has the required amount of quests, items, stats, quests, and cooldown, return true
         return hasItemsToAccept(player, quest) && hasStatsToAccept(player, quest) && hasRequiredQuestsCompleted(player, quest)
-                && hasNpcsKillsToAccept(player, quest) || (new Date().getTime() - getQuestLastCompleted(player).get(getQuestInfo(player).indexOf(quest.getName())).getTime() < quest.getCooldown());
+                && hasNpcsKillsToAccept(player, quest) && (Math.abs(Duration.between(getQuestLastCompleted(player).get(getQuestInfo(player).indexOf(quest.getName())).toInstant(), new Date().toInstant()).toMinutes()) > quest.getCooldown());
     }
 
 

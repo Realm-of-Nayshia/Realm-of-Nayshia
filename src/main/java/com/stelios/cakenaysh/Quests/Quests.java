@@ -22,7 +22,7 @@ public enum Quests {
                     .append(Component.text("I guess manually making these isn't as bad as I thought...\n\n"))
                     .append(Component.text("hello\n", TextColor.color(255,0,0), TextDecoration.BOLD, TextDecoration.OBFUSCATED))
                     .append(Component.text("|------------------|"))}
-            , 10L, 11, 11,
+            , 5L, 11, 11,
             new QuestRewards(100, new ArrayList<>(Collections.singleton(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
                     new HashMap<>() {{
                         put("maxHealth", 10);
