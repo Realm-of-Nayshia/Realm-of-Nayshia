@@ -33,9 +33,9 @@ public enum Quests {
                         put("stealth", 1);
                         put("wilsonCoin", 100);
                     }}),
-            new QuestRequirements(new ArrayList<>(), false, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
+            new QuestRequirements(new ArrayList<>(), true, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
             new QuestRequirements(new ArrayList<>(Collections.singletonList(CustomItems.WRATH_OF_SPARTA.getItem())),
-                    false, new HashMap<>(), new ArrayList<>(),
+                    true, new HashMap<>(), new ArrayList<>(),
                     new HashMap<>() {{
                         //Azariah and Guibous
                             put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",

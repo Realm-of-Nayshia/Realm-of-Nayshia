@@ -113,6 +113,18 @@ public class QuestManager {
             return;
         }
 
+        //if the quest is being set to active
+        if (status.equals("active")) {
+
+            //update the starting kill count if the quest is being set to active
+            updateStartingKillCount(player);
+
+            //take the items from the player if the quest requires it
+            if (quest.getQuestAcceptRequirements().takeItems()) {
+                main.getPlayerInventoryManager().removeItemsFromInventory(player, quest.getQuestAcceptRequirements().getItems());
+            }
+        }
+
         //set the quest to the specified status
         ArrayList<String> questStatus = getQuestStatuses(player);
         questStatus.set(getQuestInfo(player).indexOf(quest.getName()), status);
@@ -140,7 +152,9 @@ public class QuestManager {
         }
 
         //take the required items from the player
-        main.getPlayerInventoryManager().removeItemsFromInventory(player, quest.getQuestCompletionRequirements().getItems());
+        if (quest.getQuestCompletionRequirements().takeItems()) {
+            main.getPlayerInventoryManager().removeItemsFromInventory(player, quest.getQuestCompletionRequirements().getItems());
+        }
 
         //complete the quest
         ArrayList<Integer> questTimesCompleted = getQuestTimesCompleted(player);
