@@ -1,6 +1,7 @@
 package com.stelios.cakenaysh.Quests;
 
 import com.stelios.cakenaysh.Items.CustomItems;
+import com.stelios.cakenaysh.Items.Recipes;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
@@ -23,7 +24,11 @@ public enum Quests {
                     .append(Component.text("hello\n", TextColor.color(255,0,0), TextDecoration.BOLD, TextDecoration.OBFUSCATED))
                     .append(Component.text("|------------------|"))}
             , 5L, 11, 11,
-            new QuestRewards(100, new ArrayList<>(Collections.singleton(CustomItems.FIERCE_AZARIAHS_EDGE.getItem())),
+            new QuestRewards(100, new HashMap<>() {{
+                    put(CustomItems.FIERCE_AZARIAHS_EDGE.getItem(), 1);
+                    put(CustomItems.KALITSOUNI.getItem(), 10);
+                }},
+                    new ArrayList<>(Collections.singleton(Recipes.GRUBULOUSLY_GRUBBY_GRUSTARD.getRecipe())),
                     new HashMap<>() {{
                         put("maxHealth", 10);
                         put("maxStamina", 1);
@@ -35,8 +40,8 @@ public enum Quests {
                     true, new HashMap<>(), new ArrayList<>(),
                     new HashMap<>() {{
                         //Azariah and Guibous
-                            put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",
-                                    "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 1);
+                        put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",
+                                "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 1);
                     }}))),
 
 

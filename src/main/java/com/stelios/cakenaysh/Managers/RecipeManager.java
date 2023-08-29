@@ -53,6 +53,11 @@ public class RecipeManager {
     //add a recipe to the player's list
     public void addRecipe(Player player, String recipe){
 
+        //if the player has the recipe already
+        if (hasRecipe(player, recipe)){
+            return;
+        }
+
         //current recipes
         ArrayList<String> recipes = getRecipes(player);
         recipes.add(recipe);
@@ -83,7 +88,6 @@ public class RecipeManager {
 
     //add all recipes to the player
     public void addAllRecipes(Player player){
-
         for (Recipes recipe : Recipes.values()) {
             if (!hasRecipe(player, recipe.getKey().getKey())) {
                 addRecipe(player, recipe.getKey().getKey());

@@ -11,6 +11,7 @@ import org.bson.Document;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.time.Duration;
@@ -180,6 +181,11 @@ public class QuestManager {
         ////give the player the quest rewards
         main.getPlayerManager().getCustomPlayer(player.getUniqueId()).addXp(quest.getQuestRewards().getXp());
         main.getPlayerInventoryManager().addItemsToInventory(player, quest.getQuestRewards().getItems());
+
+        //add the recipes to the player
+        for (ShapedRecipe recipe : quest.getQuestRewards().getRecipes()) {
+            main.getRecipeManager().addRecipe(player, recipe.getKey().getKey());
+        }
 
         //add the stats to the player
         for (String stat : quest.getQuestRewards().getStats().keySet()) {

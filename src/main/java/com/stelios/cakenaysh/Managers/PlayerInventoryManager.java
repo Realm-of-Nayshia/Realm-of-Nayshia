@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class PlayerInventoryManager {
@@ -16,32 +17,43 @@ public class PlayerInventoryManager {
 
 
     //add an item to the player's inventory
-    public void addItemToInventory (Player player, Item item) {
+    public void addItemToInventory (Player player, Item item, int amount) {
 
-        //if the player's inventory is full, add the item to their stash
+        //if the player's inventory is full, add the item to their stash the specified amount of times
         if (player.getInventory().firstEmpty() == -1) {
-            main.getStashManager().addItemToStash(player, item.build());
 
-        //if the player's inventory isn't full, add the item to their inventory
+            for (int i = 0; i < amount; i++) {
+                main.getStashManager().addItemToStash(player, item.build());
+            }
+
+        //if the player's inventory isn't full, add the item to their inventory the specified amount of times
         } else {
-            player.getInventory().addItem(item.build());
+
+            for (int i = 0; i < amount; i++) {
+                player.getInventory().addItem(item.build());
+            }
         }
     }
 
 
     //add multiple items to the player's inventory
-    public void addItemsToInventory (Player player, ArrayList<Item> items) {
+    public void addItemsToInventory (Player player, HashMap<Item, Integer> items) {
 
         //loop through the items
-        for (Item item : items) {
+        for (Item item : items.keySet()) {
 
-            //if the player's inventory is full, add the item to their stash
+            //if the player's inventory is full, add the item to their stash the specified amount of times
             if (player.getInventory().firstEmpty() == -1) {
-                main.getStashManager().addItemToStash(player, item.build());
 
-            //if the player's inventory isn't full, add the item to their inventory
+                for (int i = 0; i < items.get(item); i++) {
+                    main.getStashManager().addItemToStash(player, item.build());
+                }
+
+            //if the player's inventory isn't full, add the item to their inventory the specified amount of times
             } else {
-                player.getInventory().addItem(item.build());
+                for (int i = 0; i < items.get(item); i++) {
+                    player.getInventory().addItem(item.build());
+                }
             }
         }
     }
