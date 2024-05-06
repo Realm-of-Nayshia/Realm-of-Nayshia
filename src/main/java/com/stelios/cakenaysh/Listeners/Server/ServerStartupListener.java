@@ -84,6 +84,7 @@ public class ServerStartupListener implements Listener {
                         } else {
                             regenLevel = -1;
                         }
+                        double regenPercent = 1+((regenLevel+1)/10.0);
 
                         //regenerate stamina if not at max
                         if (customPlayer.getStamina() < customPlayer.getMaxStamina()) {
@@ -92,7 +93,7 @@ public class ServerStartupListener implements Listener {
 
                         //regenerate health if not at max
                         if (customPlayer.getHealth() < customPlayer.getMaxHealth()) {
-                            customPlayer.addHealth(customPlayer.getHealthRegen() + regenLevel + 1);
+                            customPlayer.addHealth(customPlayer.getHealthRegen() * (float) regenPercent);
                         }
 
                         //if over max stamina, set to max stamina
