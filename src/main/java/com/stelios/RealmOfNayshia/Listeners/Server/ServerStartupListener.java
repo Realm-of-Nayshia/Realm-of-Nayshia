@@ -12,6 +12,7 @@ import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
 import java.util.logging.Level;
 
 public class ServerStartupListener implements Listener {
@@ -26,6 +27,17 @@ public class ServerStartupListener implements Listener {
 
     @EventHandler
     public void onStart(ServerLoadEvent e){
+
+        //check plugin json files
+        main.getDataFolder().mkdir();
+        File items = new File(main.getDataFolder(), "items.json");
+        File recipes = new File(main.getDataFolder(), "recipes.json");
+        File quests = new File(main.getDataFolder(), "quests.json");
+        File setBonuses = new File(main.getDataFolder(), "setBonuses.json");
+        if (!(items.exists() && recipes.exists() && quests.exists() && setBonuses.exists())){
+            main.getLogger().log(Level.SEVERE, "Plugin files are missing! Shutting down server...");
+            main.getServer().shutdown();
+        }
 
         //saving player stats every hour
         new BukkitRunnable(){
