@@ -1,12 +1,9 @@
-package com.stelios.cakenaysh.Listeners.Server;
+package com.stelios.RealmOfNayshia.Listeners.Server;
 
 import com.mongodb.MongoException;
-import com.stelios.cakenaysh.Main;
-import com.stelios.cakenaysh.Managers.StatsManager;
-import com.stelios.cakenaysh.Util.CustomPlayer;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import com.stelios.RealmOfNayshia.Main;
+import com.stelios.RealmOfNayshia.Managers.StatsManager;
+import com.stelios.RealmOfNayshia.Util.CustomPlayer;
 import org.bson.Document;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.logging.Level;
 
 public class ServerStartupListener implements Listener {
 
@@ -33,9 +32,9 @@ public class ServerStartupListener implements Listener {
             @Override
             public void run() {
                 //send a message to everyone
-                main.getServer().sendMessage(Component.text("Saving player stats...", TextColor.color(100,100,100), TextDecoration.ITALIC));
+                main.getLogger().log(Level.INFO, "Saving player stats...");
                 statsManager.updateDatabaseStatsAll();
-                main.getServer().sendMessage(Component.text("Player stats saved.", TextColor.color(100,100,100), TextDecoration.ITALIC));
+                main.getLogger().log(Level.INFO, "Player stats saved.");
             }
         }.runTaskTimerAsynchronously(main, 0, 20*3600);
     }
@@ -55,10 +54,8 @@ public class ServerStartupListener implements Listener {
                 //if the database is down
                 } catch (MongoException e) {
 
-                    //kick all the players and shut down the server
-                    for (Player player : main.getServer().getOnlinePlayers()){
-                        player.kick(Component.text("Database connection lost.", TextColor.color(255, 0, 0)));
-                    }
+                    //log the error and shutdown the server
+                    main.getLogger().log(Level.SEVERE, "Database is down!");
                     main.getServer().shutdown();
                 }
 
