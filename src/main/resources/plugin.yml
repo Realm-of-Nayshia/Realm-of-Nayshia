@@ -1,9 +1,9 @@
-name: Cakenaysh
+name: Realm-Of-Nayshia
 version: '${project.version}'
-main: com.stelios.cakenaysh.Main
+main: com.stelios.RealmOfNayshia.Main
 api-version: '1.20'
 authors: [Stelios]
-description: Main plugin for the Cakenaysh Minecraft Server
+description: Main plugin for the Realm of Nayshia Minecraft Server
 depend: [Citizens]
 softdepend: [Sentinel]
 commands:
