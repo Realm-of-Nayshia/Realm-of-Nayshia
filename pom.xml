@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.stelios</groupId>
-    <artifactId>Cakenaysh</artifactId>
+    <artifactId>Realm-of-Nayshia</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Cakenaysh</name>
+    <name>Realm-of-Nayshia</name>
 
-    <description>Main plugin for the Cakenaysh Minecraft Server</description>
+    <description>Main plugin for the Realm of Nayshia Minecraft Server</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,8 +89,8 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>C:\Users\sd\Desktop\Programming\Minecraft Projects\Cakenaysh2\target/Cakenaysh-1.0-SNAPSHOT-remapped.jar</sourceFile>
-                            <destinationFile>C:\Users\sd\Desktop\1.20.1 Paper Test Server\plugins\Cakenaysh-1.0-SNAPSHOT-remapped.jar</destinationFile>
+                            <sourceFile>C:\Users\sd\Desktop\Programming\MinecraftProjects\Realm-of-Nayshia\target/Realm-of-Nayshia-1.0-SNAPSHOT-remapped.jar</sourceFile>
+                            <destinationFile>C:\Users\sd\Desktop\Programming\MinecraftProjects\Realm of Nayshia Other\1.20.1 Paper Test Server\plugins\Realm-of-Nayshia-1.0-SNAPSHOT-remapped.jar</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
