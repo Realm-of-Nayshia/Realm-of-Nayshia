@@ -116,7 +116,7 @@ public class SentinelStatusChangeListener implements Listener {
                     ////give the player their earned drops
                     //loop through the dropped items
                     for (ItemStack item : drops) {
-
+                        //TODO: the 0 causes null pointer
                         //calculate the chance of the drop based on how much damage the player dealt to the npc
                         double chance = dropChances.get(0) * (playerDamages.get(uuid) / totalDamage);
 

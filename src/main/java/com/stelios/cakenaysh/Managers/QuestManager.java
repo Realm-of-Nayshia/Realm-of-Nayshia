@@ -514,6 +514,9 @@ public class QuestManager {
         //loop through all quests
         for (Quests quest : Quests.values()) {
 
+            //clear the kill count
+            killCountActive.clear();
+
             //loop through all the npc arrays
             for (ArrayList<String> npcUuidList : quest.getQuest().getQuestCompletionRequirements().getNpcKills().keySet()) {
 

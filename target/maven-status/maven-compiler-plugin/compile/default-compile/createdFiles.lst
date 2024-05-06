@@ -48,6 +48,7 @@ com\stelios\cakenaysh\Quests\Quest.class
 com\stelios\cakenaysh\Util\CustomPlayer$6.class
 com\stelios\cakenaysh\Quests\QuestRequirements.class
 com\stelios\cakenaysh\Npc\Traits\NpcQuest.class
+com\stelios\cakenaysh\Quests\Quests$3.class
 com\stelios\cakenaysh\AbilityCreation\Abilities\WrathOfSpartaAbility$1.class
 com\stelios\cakenaysh\Items\EquipmentBonuses.class
 com\stelios\cakenaysh\Listeners\Entity\NpcClickedListener$5.class

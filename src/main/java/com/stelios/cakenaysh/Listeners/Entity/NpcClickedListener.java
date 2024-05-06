@@ -75,6 +75,11 @@ public class NpcClickedListener implements Listener {
         //get the quest
         Quest quest = main.getQuestManager().getQuestFromName(trait.getQuestName());
 
+        //if the quest doesn't exist, return
+        if (quest == null) {
+            return;
+        }
+
         //if the npc is the quest completer and the player can complete the quest
         if (quest.getQuestCompleterId() == npc.getId() && main.getQuestManager().canCompleteQuest(player, quest)) {
 

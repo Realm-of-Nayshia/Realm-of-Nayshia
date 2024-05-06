@@ -11,9 +11,9 @@ import java.util.*;
 
 public enum Quests {
 
-    TEST_RETRIEVAL_QUEST(new Quest("Test_Retrieval_Quest",
+    TEST_QUEST_1(new Quest("Test_Quest_1",
             new TextComponent[]{Component.text("|------------------|\n\n\n\n\n\n")
-                    .append(Component.text(" Test Retrieval Quest\n"))
+                    .append(Component.text("  Test Quest 1\n"))
                     .append(Component.text("   by "))
                     .append(Component.text("test quest guy", TextColor.color(255,0,0)))
                     .append(Component.text("\n\n\n\n\n\n|------------------|"))
@@ -35,7 +35,9 @@ public enum Quests {
                         put("stealth", 1);
                         put("wilsonCoin", 100);
                     }}),
-            new QuestRequirements(new ArrayList<>(List.of("Wrath of Sparta")), true, new HashMap<>(), new ArrayList<>(), new HashMap<>()),
+            new QuestRequirements(new ArrayList<>(List.of("Wrath of Sparta")), true, new HashMap<>(),
+                    new ArrayList<>(),
+                    new HashMap<>()),
             new QuestRequirements(new ArrayList<>(List.of("Wrath of Sparta")),
                     true, new HashMap<>(), new ArrayList<>(),
                     new HashMap<>() {{
@@ -43,6 +45,33 @@ public enum Quests {
                         put(new ArrayList<>(Arrays.asList("3c9a4d77-4be2-4f5d-a282-0f1682c112da",
                                 "9768c497-c0c9-434d-873a-9dd4a0e24b80")), 1);
                     }}))),
+
+    /*ME_HUNGY(new Quest("Me_Hungy",
+            new TextComponent[]{Component.text("|------------------|\n\n\n\n\n\n")
+                    .append(Component.text(" Me Hungy\n"))
+                    .append(Component.text("   by "))
+                    .append(Component.text("Boy Bustard", TextColor.color(255,0,0)))
+                    .append(Component.text("\n\n\n\n\n\n|------------------|"))
+                    , Component.text("|------------------|")
+                    .append(Component.text("Bring me MIGHTY meal. Me hungy \n\n"))
+                    .append(Component.text("Bring mighty meal get grubbies.\n\n\n\n\n"))
+                    .append(Component.text("|------------------|"))}
+            , 10L, 12, 12,
+            new QuestRewards(10, new HashMap<>() {{
+                put(CustomItems.GRUBBY_GUSTARD.getItem(), 1);
+            }},
+                    new ArrayList<>(Collections.singleton(Recipes.GRUBULOUSLY_GRUBBY_GRUSTARD.getRecipe())),
+                    new HashMap<>() {{
+                        put("deception", 1);
+                        put("stealth", 1);
+                        put("wilsonCoin", 10);
+                    }}),
+            new QuestRequirements(new ArrayList<>(List.of("Grubulously Grubby Grustard")), false, new HashMap<>(),
+                    new ArrayList<>(Collections.singletonList(Quests.TEST_QUEST_1.getQuest())),
+                    new HashMap<>()),
+            new QuestRequirements(new ArrayList<>(List.of("Mighty Sub")),
+                    true, new HashMap<>(), new ArrayList<>(),
+                    new HashMap<>()))),*/
 
 
 
