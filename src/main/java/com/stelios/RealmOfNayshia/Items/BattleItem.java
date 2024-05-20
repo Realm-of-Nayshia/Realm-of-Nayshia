@@ -180,70 +180,36 @@ public class BattleItem extends Item {
     }
 
 
-    //getter
-    //@param Stat: The stat being retrieved.
-    //@return the value of the stat.
-    public float getStat(String Stat){
-        switch(Stat){
-            case "damage":
-                return this.damage;
-            case "attackSpeed":
-                return this.attackSpeed;
-            case "critDamage":
-                return this.critDamage;
-            case "critChance":
-                return this.critChance;
-            case "strength":
-                return this.strength;
-            case "health":
-                return this.health;
-            case "healthRegen":
-                return this.healthRegen;
-            case "stamina":
-                return this.stamina;
-            case "staminaRegen":
-                return this.staminaRegen;
-            case "defense":
-                return this.defense;
-            case "speed":
-                return this.speed;
-            case "infernalDefense":
-                return this.infernalDefense;
-            case "infernalDamage":
-                return this.infernalDamage;
-            case "undeadDefense":
-                return this.undeadDefense;
-            case "undeadDamage":
-                return this.undeadDamage;
-            case "aquaticDefense":
-                return this.aquaticDefense;
-            case "aquaticDamage":
-                return this.aquaticDamage;
-            case "aerialDefense":
-                return this.aerialDefense;
-            case "aerialDamage":
-                return this.aerialDamage;
-            case "meleeDefense":
-                return this.meleeDefense;
-            case "meleeDamage":
-                return this.meleeDamage;
-            case "rangedDefense":
-                return this.rangedDefense;
-            case "rangedDamage":
-                return this.rangedDamage;
-            case "magicDefense":
-                return this.magicDefense;
-            case "magicDamage":
-                return this.magicDamage;
-            case "meleeProficiency":
-                return this.meleeProficiency;
-            case "rangedProficiency":
-                return this.rangedProficiency;
-            case "armorProficiency":
-                return this.armorProficiency;
-        }
-        return 0;
-    }
+    //getters
+    public float getDamage() { return damage; }
+    public float getAttackSpeed() { return attackSpeed; }
+    public float getCritDamage() { return critDamage; }
+    public float getCritChance() { return critChance; }
+    public float getStrength() { return strength; }
+    public float getHealth() { return health; }
+    public float getHealthRegen() { return healthRegen; }
+    public float getStamina() { return stamina; }
+    public float getStaminaRegen() { return staminaRegen; }
+    public float getDefense() { return defense; }
+    public float getSpeed() { return speed; }
+    public float getInfernalDefense() { return infernalDefense; }
+    public float getInfernalDamage() { return infernalDamage; }
+    public float getUndeadDefense() { return undeadDefense; }
+    public float getUndeadDamage() { return undeadDamage; }
+    public float getAquaticDefense() { return aquaticDefense; }
+    public float getAquaticDamage() { return aquaticDamage; }
+    public float getAerialDefense() { return aerialDefense; }
+    public float getAerialDamage() { return aerialDamage; }
+    public float getMeleeDefense() { return meleeDefense; }
+    public float getMeleeDamage() { return meleeDamage; }
+    public float getRangedDefense() { return rangedDefense; }
+    public float getRangedDamage() { return rangedDamage; }
+    public float getMagicDefense() { return magicDefense; }
+    public float getMagicDamage() { return magicDamage; }
+    public int getMeleeProficiency() { return meleeProficiency; }
+    public int getRangedProficiency() { return rangedProficiency; }
+    public int getArmorProficiency() { return armorProficiency; }
+    public PotionEffect[] getPotionEffects() { return potionEffects; }
 
     //set the attackSpeed attribute modifier depending on the vanilla attackSpeed of the item
     public void implementAttackSpeed(String itemType){
@@ -481,39 +447,39 @@ public class BattleItem extends Item {
 
         //adding the custom item attributes to the item lore
         loreList.add(0, Component.text(""));
-        makeLoreLine(loreList, "Infernal Defense: ", this.getStat("infernalDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Infernal Damage: ", this.getStat("infernalDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Undead Defense: ", this.getStat("undeadDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Undead Damage: ", this.getStat("undeadDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Aquatic Defense: ", this.getStat("aquaticDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Aquatic Damage: ", this.getStat("aquaticDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Aerial Defense: ", this.getStat("aerialDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Aerial Damage: ", this.getStat("aerialDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Melee Defense: ", this.getStat("meleeDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Melee Damage: ", this.getStat("meleeDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Ranged Defense: ", this.getStat("rangedDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Ranged Damage: ", this.getStat("rangedDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Magic Defense: ", this.getStat("magicDefense"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Magic Damage: ", this.getStat("magicDamage"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Speed: ", this.getStat("speed"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Attack Speed: ", this.getStat("attackSpeed"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Crit Damage: ", this.getStat("critDamage"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Crit Chance: ", this.getStat("critChance"), true, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Defense: ", this.getStat("defense"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Stamina Regen: ", this.getStat("staminaRegen"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Stamina: ", this.getStat("stamina"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Health Regen: ", this.getStat("healthRegen"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Health: ", this.getStat("health"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Strength: ", this.getStat("strength"), false, false, 240, 40, 50, 200, 200, 200);
-        makeLoreLine(loreList, "Damage: ", this.getStat("damage"), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Infernal Defense: ", this.getInfernalDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Infernal Damage: ", this.getInfernalDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Undead Defense: ", this.getUndeadDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Undead Damage: ", this.getUndeadDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Aquatic Defense: ", this.getAquaticDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Aquatic Damage: ", this.getAquaticDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Aerial Defense: ", this.getAerialDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Aerial Damage: ", this.getAerialDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Melee Defense: ", this.getMeleeDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Melee Damage: ", this.getMeleeDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Ranged Defense: ", this.getRangedDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Ranged Damage: ", this.getRangedDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Magic Defense: ", this.getMagicDefense(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Magic Damage: ", this.getMagicDamage(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Speed: ", this.getSpeed(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Attack Speed: ", this.getAttackSpeed(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Crit Damage: ", this.getCritDamage(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Crit Chance: ", this.getCritChance(), true, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Defense: ", this.getDefense(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Stamina Regen: ", this.getStaminaRegen(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Stamina: ", this.getStamina(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Health Regen: ", this.getHealthRegen(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Health: ", this.getHealth(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Strength: ", this.getStrength(), false, false, 240, 40, 50, 200, 200, 200);
+        makeLoreLine(loreList, "Damage: ", this.getDamage(), false, false, 240, 40, 50, 200, 200, 200);
 
-        if (this.getStat("meleeProficiency") != 0 || this.getStat("rangedProficiency") != 0 || this.getStat("armorProficiency") != 0){
+        if (this.getMeleeProficiency() != 0 || this.getRangedProficiency() != 0 || this.getArmorProficiency() != 0){
             loreList.add(0, Component.text(""));
         }
 
-        makeLoreLine(loreList, "Armor Proficiency: ", this.getStat("armorProficiency"), false, true, 77,85,92, 200, 200, 200);
-        makeLoreLine(loreList, "Ranged Proficiency: ", this.getStat("rangedProficiency"), false, true, 240, 185, 85, 200, 200, 200);
-        makeLoreLine(loreList, "Melee Proficiency: ", this.getStat("meleeProficiency"), false, true, 214,88,88, 200, 200, 200);
+        makeLoreLine(loreList, "Armor Proficiency: ", this.getArmorProficiency(), false, true, 77,85,92, 200, 200, 200);
+        makeLoreLine(loreList, "Ranged Proficiency: ", this.getRangedProficiency(), false, true, 240, 185, 85, 200, 200, 200);
+        makeLoreLine(loreList, "Melee Proficiency: ", this.getMeleeProficiency(), false, true, 214,88,88, 200, 200, 200);
 
         //setting the lore of the item
         super.getItemMeta().lore(loreList);
