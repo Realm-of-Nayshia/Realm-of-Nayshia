@@ -27,21 +27,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static org.bukkit.Bukkit.getLogger;
+
 public class Item {
 
     private final ItemStack itemStack;
     private ItemMeta itemMeta;
     private final boolean unstackable;
+    private final String textureURL;
+    private final String name;
 
 
     //@param material: The material of the item being built.
     //@param amount: The amount of the item being built.
     //@param unstackable: Whether the item is stackable or not.
     //@param name: The name of the item being built.
+    //@param textureURL: The texture of the item being built.
     public Item(Material material, int amount, boolean unstackable, String name, String textureURL) {
         this.itemStack = new ItemStack(material, amount);
         this.itemMeta = this.itemStack.getItemMeta();
         this.unstackable = unstackable;
+        this.textureURL = textureURL;
+        this.name = name;
 
         //if the texture string is not null, set the texture of the item
         if (textureURL != null) {
@@ -51,7 +58,7 @@ public class Item {
             try {
                 textures.setSkin(new URL("http://textures.minecraft.net/texture/" + textureURL));
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                getLogger().warning("Invalid texture URL: " + textureURL);;
             }
             profile.setTextures(textures);
             skullMeta.setPlayerProfile(profile);
@@ -76,10 +83,13 @@ public class Item {
     //@param material: The material of the item being built.
     //@param amount: The amount of the item being built.
     //@param unstackable: Whether the item is stackable or not.
-    public Item(Material material, int amount, boolean unstackable) {
+    //@param name: The name of the item being built.
+    public Item(Material material, int amount, boolean unstackable, String name) {
         this.itemStack = new ItemStack(material, amount);
         this.itemMeta = this.itemStack.getItemMeta();
         this.unstackable = unstackable;
+        this.textureURL = null;
+        this.name = name;
 
         //setting pdc values for the item
         PersistentDataContainer pdc = this.getItemMeta().getPersistentDataContainer();
@@ -93,13 +103,38 @@ public class Item {
         }
 
         addItemFlags();
+    }
 
+    //@param material: The material of the item being built.
+    //@param amount: The amount of the item being built.
+    //@param unstackable: Whether the item is stackable or not.
+    public Item(Material material, int amount, boolean unstackable) {
+        this.itemStack = new ItemStack(material, amount);
+        this.itemMeta = this.itemStack.getItemMeta();
+        this.unstackable = unstackable;
+        this.textureURL = null;
+        this.name = null;
+
+        //setting pdc values for the item
+        PersistentDataContainer pdc = this.getItemMeta().getPersistentDataContainer();
+
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, "regular");
+
+        //if the item is unstackable, add a unique identifier to the item
+        if (unstackable){
+            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"),
+                    PersistentDataType.STRING, UUID.randomUUID().toString());
+        }
+
+        addItemFlags();
     }
 
     //getters
     public ItemStack getItemStack(){return this.itemStack;}
     public ItemMeta getItemMeta(){return this.itemMeta;}
-    public boolean getUnstackable(){return this.unstackable;}
+    public boolean isUnstackable(){return this.unstackable;}
+    public String getTextureURL(){return this.textureURL;}
+    public String getName(){return this.name;}
 
     //updates the itemMeta of the item
     public void updateItemMeta(){
