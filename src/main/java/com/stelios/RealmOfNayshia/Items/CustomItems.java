@@ -21,7 +21,7 @@ public enum CustomItems {
 
 
     //GUI ITEMS
-    SKILLS(new Item(Material.END_CRYSTAL, 1,false)
+    SKILLS(new Item(Material.END_CRYSTAL, 1,false, "Skills")
             .setDisplayName(new ArrayList<>(List.of("Skills")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(false)),
@@ -37,7 +37,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    QUESTS(new Item(Material.WRITABLE_BOOK, 1,false)
+    QUESTS(new Item(Material.WRITABLE_BOOK, 1,false, "Quests")
             .setDisplayName(new ArrayList<>(List.of("Quest Log")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(false)),
@@ -53,7 +53,7 @@ public enum CustomItems {
                     new ArrayList<>(Arrays.asList(false, false)),
                     new ArrayList<>(Arrays.asList(false, false)))),
 
-    RECIPE_BOOK(new Item(Material.WRITTEN_BOOK, 1,false)
+    RECIPE_BOOK(new Item(Material.WRITTEN_BOOK, 1,false, "Recipe Book")
             .setDisplayName(new ArrayList<>(List.of("Recipe Book")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(false)),
@@ -69,7 +69,7 @@ public enum CustomItems {
                     new ArrayList<>(Arrays.asList(false, false)),
                     new ArrayList<>(Arrays.asList(false, false)))),
 
-    CHARACTER_MANAGEMENT(new Item(Material.NAME_TAG, 1,false)
+    CHARACTER_MANAGEMENT(new Item(Material.NAME_TAG, 1,false, "Character Management")
             .setDisplayName(new ArrayList<>(List.of("Character Management")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(false)),
@@ -105,7 +105,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    PREVIOUS_PAGE(new Item(Material.PLAYER_HEAD, 1,false, "Previous Page",
+    PREVIOUS_PAGE(new Item(Material.PLAYER_HEAD, 1,true, "Previous Page",
             "cdc9e4dcfa4221a1fadc1b5b2b11d8beeb57879af1c42362142bae1edd5")
             .setDisplayName(new ArrayList<>(List.of("Previous Page")),
                     new ArrayList<>(Arrays.asList(255,255,255)),
@@ -125,7 +125,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    CLOSE(new Item(Material.BARRIER, 1,false)
+    CLOSE(new Item(Material.BARRIER, 1,false, "Close")
             .setDisplayName(new ArrayList<>(List.of("Close")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(false)),
@@ -134,7 +134,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    SETTINGS(new Item(Material.REDSTONE_TORCH, 1,false)
+    SETTINGS(new Item(Material.REDSTONE_TORCH, 1,false, "Settings")
             .setDisplayName(new ArrayList<>(List.of("Settings")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(false)),
@@ -150,7 +150,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    BLANK_BLACK_PANE(new Item(Material.BLACK_STAINED_GLASS_PANE, 1,false)
+    BLANK_BLACK_PANE(new Item(Material.BLACK_STAINED_GLASS_PANE, 1,false, "Blank Black Pane")
             .setDisplayName(new ArrayList<>(List.of("")),
                     new ArrayList<>(Arrays.asList(0,0,0)),
                     new ArrayList<>(List.of(false)),
@@ -159,7 +159,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    BLANK_LIGHT_GRAY_PANE(new Item(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 1,false)
+    BLANK_LIGHT_GRAY_PANE(new Item(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 1,false, "Blank Light Gray Pane")
             .setDisplayName(new ArrayList<>(List.of("")),
                     new ArrayList<>(Arrays.asList(0,0,0)),
                     new ArrayList<>(List.of(false)),
@@ -168,7 +168,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    LOCKED_RED_PANE(new Item(Material.RED_STAINED_GLASS_PANE, 1, false)
+    LOCKED_RED_PANE(new Item(Material.RED_STAINED_GLASS_PANE, 1, false, "Locked Red Pane")
             .setDisplayName(new ArrayList<>(List.of("LOCKED")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(true)),
@@ -177,7 +177,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    ACCEPT_BUTTON(new Item(Material.GREEN_CONCRETE, 1, false)
+    ACCEPT_BUTTON(new Item(Material.GREEN_CONCRETE, 1, false, "Accept Button")
             .setDisplayName(new ArrayList<>(List.of("Accept")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(true)),
@@ -186,7 +186,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    DECLINE_BUTTON(new Item(Material.RED_CONCRETE, 1, false)
+    DECLINE_BUTTON(new Item(Material.RED_CONCRETE, 1, false, "Decline Button")
             .setDisplayName(new ArrayList<>(List.of("Decline")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(true)),
@@ -195,7 +195,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    YES_BUTTON(new Item(Material.GREEN_CONCRETE, 1, false)
+    YES_BUTTON(new Item(Material.GREEN_CONCRETE, 1, false, "Yes Button")
             .setDisplayName(new ArrayList<>(List.of("Yes")),
                     new ArrayList<>(Arrays.asList(0,255,0)),
                     new ArrayList<>(List.of(true)),
@@ -204,7 +204,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    NO_BUTTON(new Item(Material.RED_CONCRETE, 1, false)
+    NO_BUTTON(new Item(Material.RED_CONCRETE, 1, false, "No Button")
             .setDisplayName(new ArrayList<>(List.of("No")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(true)),
@@ -213,7 +213,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    CANCEL_QUEST_BUTTON(new Item(Material.RED_CONCRETE, 1, false)
+    CANCEL_QUEST_BUTTON(new Item(Material.RED_CONCRETE, 1, false, "Cancel Quest Button")
             .setDisplayName(new ArrayList<>(List.of("Cancel quest")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(true)),
@@ -849,6 +849,15 @@ public enum CustomItems {
         return item;
     }
 
+    //gets all items in the enum
+    //@return ArrayList<Item> of all the items
+    public static ArrayList<Item> getItems(){
+        ArrayList<Item> items = new ArrayList<>();
+        for (CustomItems item : CustomItems.values()){
+            items.add(item.getItem());
+        }
+        return items;
+    }
 
     //gets the name of an item
     //@param item: The item being picked.
@@ -870,7 +879,7 @@ public enum CustomItems {
             if (item.name().equalsIgnoreCase(name)){
 
                 //if the item is unstackable, make it unstackable
-                if (item.getItem().getUnstackable()){
+                if (item.getItem().isUnstackable()){
                     item.item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"),
                             PersistentDataType.STRING, UUID.randomUUID().toString());
                 }
