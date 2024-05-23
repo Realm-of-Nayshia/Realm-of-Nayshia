@@ -53,6 +53,19 @@ public class ConsumableItem extends Item {
 
     }
 
+    //getters
+    public String[] getStats() {
+        return stats;
+    }
+    public int[] getStatsAmount() {
+        return statsAmount;
+    }
+    public int[] getStatsDuration() {
+        return statsDuration;
+    }
+    public PotionEffect[] getPotionEffects() {
+        return potionEffects;
+    }
 
     //sets the lore of the item
     //@param loreText: The text of the lore being set to the item.
