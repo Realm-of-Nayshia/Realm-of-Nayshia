@@ -2,6 +2,7 @@ package com.stelios.RealmOfNayshia.Util;
 
 import com.google.gson.*;
 import com.stelios.RealmOfNayshia.Items.Item;
+import com.stelios.RealmOfNayshia.Main;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Material;
@@ -32,14 +33,17 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
         // Manually handle known data types
-        for (NamespacedKey key : pdc.getKeys()) {
-            if (pdc.has(key, PersistentDataType.STRING)) {
-                metaObject.addProperty(key.toString(), pdc.get(key, PersistentDataType.STRING));
-            } else if (pdc.has(key, PersistentDataType.INTEGER)) {
-                metaObject.addProperty(key.toString(), pdc.get(key, PersistentDataType.INTEGER));
-            } else if (pdc.has(key, PersistentDataType.BOOLEAN)) {
-                metaObject.addProperty(key.toString(), pdc.get(key, PersistentDataType.BOOLEAN));
-            }
+        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING)) {
+            metaObject.addProperty("itemType", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING));
+        }
+        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING)) {
+            metaObject.addProperty("itemID", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING));
+        }
+        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN)) {
+            metaObject.addProperty("unstackable", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN));
+        }
+        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING)) {
+            metaObject.addProperty("uniqueID", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING));
         }
 
         // Serialize display name if present
@@ -81,29 +85,35 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
         for (Map.Entry<String, JsonElement> entry : metaObject.entrySet()) {
-            if (entry.getKey().equals("displayName")) {
-                String displayNameJson = entry.getValue().getAsString();
-                Component displayName = GsonComponentSerializer.gson().deserialize(displayNameJson);
-                meta.displayName(displayName);
-            } else if (entry.getKey().equals("lore")) {
-                JsonArray loreArray = entry.getValue().getAsJsonArray();
-                List<Component> lore = new ArrayList<>();
-                for (JsonElement loreElement : loreArray) {
-                    Component loreLine = GsonComponentSerializer.gson().deserialize(loreElement.getAsString());
-                    lore.add(loreLine);
-                }
-                meta.lore(lore);
-            } else {
-                NamespacedKey key = NamespacedKey.fromString(entry.getKey());
-                if (entry.getValue().isJsonPrimitive()) {
-                    if (entry.getValue().getAsJsonPrimitive().isString()) {
-                        pdc.set(key, PersistentDataType.STRING, entry.getValue().getAsString());
-                    } else if (entry.getValue().getAsJsonPrimitive().isNumber()) {
-                        pdc.set(key, PersistentDataType.INTEGER, entry.getValue().getAsInt());
-                    } else if (entry.getValue().getAsJsonPrimitive().isBoolean()) {
-                        pdc.set(key, PersistentDataType.BOOLEAN, entry.getValue().getAsBoolean());
+            switch (entry.getKey()) {
+                case "displayName":
+                    String displayNameJson = entry.getValue().getAsString();
+                    Component displayName = GsonComponentSerializer.gson().deserialize(displayNameJson);
+                    meta.displayName(displayName);
+                    break;
+                case "lore":
+                    JsonArray loreArray = entry.getValue().getAsJsonArray();
+                    List<Component> lore = new ArrayList<>();
+                    for (JsonElement loreElement : loreArray) {
+                        Component loreLine = GsonComponentSerializer.gson().deserialize(loreElement.getAsString());
+                        lore.add(loreLine);
                     }
-                }
+                    meta.lore(lore);
+                    break;
+                case "itemType":
+                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, entry.getValue().getAsString());
+                    break;
+                case "itemID":
+                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, entry.getValue().getAsString());
+                    break;
+                case "unstackable":
+                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN, entry.getValue().getAsBoolean());
+                    break;
+                case "uniqueID":
+                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, entry.getValue().getAsString());
+                    break;
+                default:
+                    break;
             }
         }
 
