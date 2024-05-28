@@ -164,7 +164,7 @@ public final class Main extends JavaPlugin {
         getCommand("questresponsereset").setTabCompleter(new QuestResponseTypeTabComplete());
 
         getCommand("getnpcid").setExecutor(new GetNpcIdCommand());
-        getCommand("copynbt").setExecutor(new GetNBTCommand());
+        getCommand("getnbt").setExecutor(new GetNBTCommand());
     }
 
     private void registerAbilities(){
