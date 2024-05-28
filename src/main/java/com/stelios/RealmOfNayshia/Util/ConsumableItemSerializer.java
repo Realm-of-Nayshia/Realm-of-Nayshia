@@ -1,5 +1,6 @@
 package com.stelios.RealmOfNayshia.Util;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.gson.*;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import com.stelios.RealmOfNayshia.Items.ConsumableItem;
@@ -9,14 +10,21 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.profile.PlayerTextures;
 
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>, JsonDeserializer<ConsumableItem> {
 
@@ -33,17 +41,6 @@ public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>,
 
         // Get PDC to serialize specific fields
         PersistentDataContainer pdc = consumableItem.getItemMeta().getPersistentDataContainer();
-
-        // Serialize common PDC fields
-        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING)) {
-            jsonObject.addProperty("itemType", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING));
-        }
-        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING)) {
-            jsonObject.addProperty("itemID", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING));
-        }
-        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN)) {
-            jsonObject.addProperty("unstackable", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN));
-        }
 
         // Serialize specific fields
         Integer foodValue = pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "foodValue"), PersistentDataType.INTEGER);
@@ -105,6 +102,7 @@ public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>,
         int amount = item.getItemStack().getAmount();
         boolean unstackable = item.isUnstackable();
         String name = item.getName();
+        String textureURL = item.getTextureURL();
 
         int foodValue = jsonObject.get("foodValue").getAsInt();
         float saturationValue = jsonObject.get("saturationValue").getAsFloat();
@@ -141,32 +139,38 @@ public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>,
         ItemMeta meta = consumableItem.getItemStack().getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
-        if (metaObject.has("displayName")) {
-            String displayNameJson = metaObject.get("displayName").getAsString();
-            Component displayName = GsonComponentSerializer.gson().deserialize(displayNameJson);
-            meta.displayName(displayName);
-        }
-
-        if (metaObject.has("lore")) {
-            JsonArray loreArray = metaObject.get("lore").getAsJsonArray();
-            List<Component> lore = new ArrayList<>();
-            for (JsonElement loreElement : loreArray) {
-                Component loreLine = GsonComponentSerializer.gson().deserialize(loreElement.getAsString());
-                lore.add(loreLine);
+        for (Map.Entry<String, JsonElement> entry : metaObject.entrySet()) {
+            switch (entry.getKey()) {
+                case "displayName":
+                    String displayNameJson = entry.getValue().getAsString();
+                    Component displayName = GsonComponentSerializer.gson().deserialize(displayNameJson);
+                    meta.displayName(displayName);
+                    break;
+                case "lore":
+                    JsonArray loreArray = entry.getValue().getAsJsonArray();
+                    List<Component> lore = new ArrayList<>();
+                    for (JsonElement loreElement : loreArray) {
+                        Component loreLine = GsonComponentSerializer.gson().deserialize(loreElement.getAsString());
+                        lore.add(loreLine);
+                    }
+                    meta.lore(lore);
+                    break;
+                case "customModelData":
+                    meta.setCustomModelData(entry.getValue().getAsInt());
+                    break;
+                case "itemFlags":
+                    JsonArray flagsArray = entry.getValue().getAsJsonArray();
+                    for (JsonElement flagElement : flagsArray) {
+                        meta.addItemFlags(ItemFlag.valueOf(flagElement.getAsString()));
+                    }
+                    break;
             }
-            meta.lore(lore);
         }
 
         // Set the PDC values
-        if (jsonObject.has("itemType")) {
-            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, jsonObject.get("itemType").getAsString());
-        }
-        if (jsonObject.has("itemID")) {
-            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, jsonObject.get("itemID").getAsString());
-        }
-        if (jsonObject.has("unstackable")) {
-            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN, jsonObject.get("unstackable").getAsBoolean());
-        }
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, "consumable");
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, name);
+        pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN, unstackable);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "foodValue"), PersistentDataType.INTEGER, foodValue);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "saturationValue"), PersistentDataType.FLOAT, saturationValue);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "stats"), DataType.STRING_ARRAY, stats);
@@ -174,7 +178,22 @@ public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>,
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "statsDuration"), DataType.INTEGER_ARRAY, statsDuration);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "potionEffects"), DataType.POTION_EFFECT_ARRAY, potionEffects);
 
-        consumableItem.getItemStack().setItemMeta(meta);
+        if (textureURL != null) {
+            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "textureURL"), PersistentDataType.STRING, textureURL);
+            SkullMeta skullMeta = (SkullMeta) meta;
+            PlayerProfile profile = Main.getPlugin(Main.class).getServer().createProfile(UUID.randomUUID(), name);
+            PlayerTextures textures = profile.getTextures();
+            try {
+                textures.setSkin(new URL("http://textures.minecraft.net/texture/" + textureURL));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            profile.setTextures(textures);
+            skullMeta.setPlayerProfile(profile);
+            consumableItem.getItemStack().setItemMeta(skullMeta);
+        } else {
+            consumableItem.getItemStack().setItemMeta(meta);
+        }
 
         return consumableItem;
     }

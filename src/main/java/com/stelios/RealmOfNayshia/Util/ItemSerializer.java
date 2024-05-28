@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -37,7 +38,7 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
             metaObject.addProperty("itemType", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING));
         }
         if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING)) {
-            metaObject.addProperty("itemID", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING));
+            metaObject.addProperty("name", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING));
         }
         if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN)) {
             metaObject.addProperty("unstackable", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN));
@@ -45,6 +46,18 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
         if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING)) {
             metaObject.addProperty("uniqueID", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING));
         }
+
+        // Serialize custom model data if present
+        if (meta.hasCustomModelData()) {
+            metaObject.addProperty("customModelData", meta.getCustomModelData());
+        }
+
+        // Serialize ItemFlags
+        JsonArray flagsArray = new JsonArray();
+        for (ItemFlag flag : meta.getItemFlags()) {
+            flagsArray.add(flag.name());
+        }
+        metaObject.add("itemFlags", flagsArray);
 
         // Serialize display name if present
         if (meta.hasDisplayName()) {
@@ -100,10 +113,19 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
                     }
                     meta.lore(lore);
                     break;
+                case "customModelData":
+                    meta.setCustomModelData(entry.getValue().getAsInt());
+                    break;
+                case "itemFlags":
+                    JsonArray flagsArray = entry.getValue().getAsJsonArray();
+                    for (JsonElement flagElement : flagsArray) {
+                        meta.addItemFlags(ItemFlag.valueOf(flagElement.getAsString()));
+                    }
+                    break;
                 case "itemType":
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, entry.getValue().getAsString());
                     break;
-                case "itemID":
+                case "name":
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, entry.getValue().getAsString());
                     break;
                 case "unstackable":
@@ -111,8 +133,6 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
                     break;
                 case "uniqueID":
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, entry.getValue().getAsString());
-                    break;
-                default:
                     break;
             }
         }
