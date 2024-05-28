@@ -93,5 +93,5 @@ commands:
     syntax: /playtime
   getnbt:
     description: Copies the NBT data of the item in the main hand
-    usage: /copynbt
+    usage: /getnbt
     permission: op
