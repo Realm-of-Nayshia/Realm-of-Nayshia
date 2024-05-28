@@ -91,3 +91,7 @@ commands:
   playtime:
     description: Shows the playtime of the player
     syntax: /playtime
+  getnbt:
+    description: Copies the NBT data of the item in the main hand
+    usage: /copynbt
+    permission: op
