@@ -96,7 +96,7 @@ public class BattleItemSerializer implements JsonSerializer<BattleItem>, JsonDes
                 modifierObject.addProperty("name", modifier.getName());
                 modifierObject.addProperty("amount", modifier.getAmount());
                 modifierObject.addProperty("operation", modifier.getOperation().name());
-                modifierObject.addProperty("slot", modifier.getSlot().name());
+                if (modifier.getSlot() != null) { modifierObject.addProperty("slot", modifier.getSlot().name()); }
                 modifierObject.addProperty("uuid", modifier.getUniqueId().toString());
                 modifiersArray.add(modifierObject);
             }
