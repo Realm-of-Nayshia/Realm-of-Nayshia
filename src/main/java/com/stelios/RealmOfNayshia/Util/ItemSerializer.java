@@ -16,6 +16,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<Item> {
 
@@ -132,7 +133,7 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "unstackable"), PersistentDataType.BOOLEAN, entry.getValue().getAsBoolean());
                     break;
                 case "uniqueID":
-                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, entry.getValue().getAsString());
+                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
                     break;
             }
         }

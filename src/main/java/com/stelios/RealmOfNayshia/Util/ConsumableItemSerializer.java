@@ -178,6 +178,10 @@ public class ConsumableItemSerializer implements JsonSerializer<ConsumableItem>,
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "statsDuration"), DataType.INTEGER_ARRAY, statsDuration);
         pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "potionEffects"), DataType.POTION_EFFECT_ARRAY, potionEffects);
 
+        if (unstackable) {
+            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+        }
+
         if (textureURL != null) {
             pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "textureURL"), PersistentDataType.STRING, textureURL);
             SkullMeta skullMeta = (SkullMeta) meta;
