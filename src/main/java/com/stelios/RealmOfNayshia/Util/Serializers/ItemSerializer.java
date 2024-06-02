@@ -35,9 +35,6 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
         // Manually handle known data types
-        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING)) {
-            metaObject.addProperty("itemType", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING));
-        }
         if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING)) {
             metaObject.addProperty("name", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING));
         }
@@ -78,6 +75,11 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
         }
 
         jsonObject.add("itemMeta", metaObject);
+
+        // Handle itemType separately
+        if (pdc.has(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING)) {
+            jsonObject.addProperty("itemType", pdc.get(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING));
+        }
 
         return jsonObject;
     }
@@ -123,9 +125,6 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
                         meta.addItemFlags(ItemFlag.valueOf(flagElement.getAsString()));
                     }
                     break;
-                case "itemType":
-                    pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, entry.getValue().getAsString());
-                    break;
                 case "name":
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "name"), PersistentDataType.STRING, entry.getValue().getAsString());
                     break;
@@ -136,6 +135,12 @@ public class ItemSerializer implements JsonSerializer<Item>, JsonDeserializer<It
                     pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
                     break;
             }
+        }
+
+        // Handle itemType separately
+        if (jsonObject.has("itemType")) {
+            String itemType = jsonObject.get("itemType").getAsString();
+            pdc.set(new NamespacedKey(Main.getPlugin(Main.class), "itemType"), PersistentDataType.STRING, itemType);
         }
 
         item.getItemStack().setItemMeta(meta);
