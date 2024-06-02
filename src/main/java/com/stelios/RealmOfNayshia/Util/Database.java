@@ -16,6 +16,10 @@ public class Database {
     private final MongoCollection<Document> playerStashes;
     private final MongoCollection<Document> playerItems;
     private final MongoCollection<Document> npcInfo;
+    private final MongoCollection<Document> items;
+    private final MongoCollection<Document> quests;
+    private final MongoCollection<Document> recipes;
+    private final MongoCollection<Document> setBonuses;
 
     public Database() {
         client = MongoClients.create();
@@ -26,6 +30,10 @@ public class Database {
         playerStashes = database.getCollection("playerStashes");
         playerItems = database.getCollection("playerItems");
         npcInfo = database.getCollection("npcInfo");
+        items = database.getCollection("items");
+        quests = database.getCollection("quests");
+        recipes = database.getCollection("recipes");
+        setBonuses = database.getCollection("setBonuses");
     }
 
     //getters
@@ -52,6 +60,18 @@ public class Database {
     }
     public MongoCollection<Document> getNpcInfo() {
         return npcInfo;
+    }
+    public MongoCollection<Document> getItems() {
+        return items;
+    }
+    public MongoCollection<Document> getQuests() {
+        return quests;
+    }
+    public MongoCollection<Document> getRecipes() {
+        return recipes;
+    }
+    public MongoCollection<Document> getSetBonuses() {
+        return setBonuses;
     }
 
 }
