@@ -1,4 +1,4 @@
-package com.stelios.RealmOfNayshia.Util;
+package com.stelios.RealmOfNayshia.Util.Serializers;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.gson.*;
