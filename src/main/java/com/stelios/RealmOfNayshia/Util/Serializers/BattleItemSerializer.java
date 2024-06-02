@@ -40,8 +40,6 @@ public class BattleItemSerializer implements JsonSerializer<BattleItem>, JsonDes
         JsonElement itemElement = context.serialize((Item) battleItem, Item.class);
         jsonObject = itemElement.getAsJsonObject();
 
-        System.out.println(itemElement.getAsJsonObject());
-
         jsonObject.addProperty("damage", battleItem.getDamage());
         jsonObject.addProperty("attackSpeed", battleItem.getAttackSpeed());
         jsonObject.addProperty("critDamage", battleItem.getCritDamage());
