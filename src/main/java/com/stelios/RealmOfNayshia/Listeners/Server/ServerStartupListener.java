@@ -3,7 +3,7 @@ package com.stelios.RealmOfNayshia.Listeners.Server;
 import com.mongodb.MongoException;
 import com.stelios.RealmOfNayshia.Main;
 import com.stelios.RealmOfNayshia.Managers.StatsManager;
-import com.stelios.RealmOfNayshia.Util.CustomPlayer;
+import com.stelios.RealmOfNayshia.Util.*;
 import org.bson.Document;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,11 +30,11 @@ public class ServerStartupListener implements Listener {
 
         //check plugin json files
         main.getDataFolder().mkdir();
-        File items = new File(main.getDataFolder(), "items.json");
-        File recipes = new File(main.getDataFolder(), "recipes.json");
-        File quests = new File(main.getDataFolder(), "quests.json");
-        File setBonuses = new File(main.getDataFolder(), "setBonuses.json");
-        if (!(items.exists() && recipes.exists() && quests.exists() && setBonuses.exists())){
+        File itemFile = new File(main.getDataFolder(), "items.json");
+        File recipeFile = new File(main.getDataFolder(), "recipes.json");
+        File questFile = new File(main.getDataFolder(), "quests.json");
+        File setBonuseFile = new File(main.getDataFolder(), "setBonuses.json");
+        if (!(itemFile.exists() && recipeFile.exists() && questFile.exists() && setBonuseFile.exists())){
             main.getLogger().log(Level.SEVERE, "Plugin files are missing! Shutting down server...");
             main.getServer().shutdown();
         }
@@ -63,7 +63,7 @@ public class ServerStartupListener implements Listener {
                 try {
                     main.getDatabase().getDatabase().runCommand(new Document("ping", 1));
 
-                //if the database is down
+                    //if the database is down
                 } catch (MongoException e) {
 
                     //log the error and shutdown the server
