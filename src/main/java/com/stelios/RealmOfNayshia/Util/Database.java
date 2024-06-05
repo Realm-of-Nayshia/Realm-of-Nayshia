@@ -17,6 +17,8 @@ public class Database {
     private final MongoCollection<Document> playerItems;
     private final MongoCollection<Document> npcInfo;
     private final MongoCollection<Document> items;
+    private final MongoCollection<Document> battleItems;
+    private final MongoCollection<Document> consumableItems;
     private final MongoCollection<Document> quests;
     private final MongoCollection<Document> recipes;
     private final MongoCollection<Document> setBonuses;
@@ -31,6 +33,8 @@ public class Database {
         playerItems = database.getCollection("playerItems");
         npcInfo = database.getCollection("npcInfo");
         items = database.getCollection("items");
+        battleItems = database.getCollection("battleItems");
+        consumableItems = database.getCollection("consumableItems");
         quests = database.getCollection("quests");
         recipes = database.getCollection("recipes");
         setBonuses = database.getCollection("setBonuses");
@@ -63,6 +67,12 @@ public class Database {
     }
     public MongoCollection<Document> getItems() {
         return items;
+    }
+    public MongoCollection<Document> getBattleItems() {
+        return battleItems;
+    }
+    public MongoCollection<Document> getConsumableItems() {
+        return consumableItems;
     }
     public MongoCollection<Document> getQuests() {
         return quests;
