@@ -213,7 +213,7 @@ public enum CustomItems {
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)))),
 
-    CANCEL_QUEST_BUTTON(new Item(Material.RED_CONCRETE, 1, false, "Cancel Quest Button")
+    CANCEL_QUEST_BUTTON(new Item(Material.RED_CONCRETE, 1, true, "Cancel Quest Button")
             .setDisplayName(new ArrayList<>(List.of("Cancel quest")),
                     new ArrayList<>(Arrays.asList(255,0,0)),
                     new ArrayList<>(List.of(true)),
@@ -379,6 +379,28 @@ public enum CustomItems {
             .setLore(new ArrayList<>(List.of("We do a little more testing...")),
                     new ArrayList<>(Arrays.asList(105, 151, 224)),
                     new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))),
+
+    TESTING_SWORD(new BattleItem(Material.IRON_SWORD, 1, false, "Testing Sword", "weapon", 1, 60, 1, 1,
+            0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,
+            0,0,0,null,
+            new PotionEffect[]{
+                new PotionEffect(PotionEffectType.POISON, 20*10, 0)
+            }).setUnbreakable()
+            .setDisplayName(new ArrayList<>(List.of("Testing Sword")),
+                    new ArrayList<>(Arrays.asList(255,215,0)),
+                    new ArrayList<>(List.of(true)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)),
+                    new ArrayList<>(List.of(false)))
+            .setLore(new ArrayList<>(List.of("We do a little more testing...")),
+                    new ArrayList<>(Arrays.asList(255,215,0)),
+                    new ArrayList<>(List.of(true)),
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)),
                     new ArrayList<>(List.of(false)),
@@ -690,7 +712,7 @@ public enum CustomItems {
 
 
     //CONSUMABLE ITEMS
-    FILET_MIGNON(new ConsumableItem(Material.COOKED_BEEF, 1, false, "Test Consumable",
+    FILET_MIGNON(new ConsumableItem(Material.COOKED_BEEF, 1, true, "Filet Mignon",
             18, 15,
             new String[]{"Strength", "Crit Damage"},
             new int[]{10, 20},
@@ -854,7 +876,33 @@ public enum CustomItems {
     public static ArrayList<Item> getItems(){
         ArrayList<Item> items = new ArrayList<>();
         for (CustomItems item : CustomItems.values()){
-            items.add(item.getItem());
+            if (!(item.getItem() instanceof BattleItem) && !(item.getItem() instanceof ConsumableItem)){
+                items.add(item.getItem());
+            }
+        }
+        return items;
+    }
+
+    //gets all the battleitems in the enum
+    //@return ArrayList<BattleItem> of all the battleitems
+    public static ArrayList<BattleItem> getBattleItems(){
+        ArrayList<BattleItem> items = new ArrayList<>();
+        for (CustomItems item : CustomItems.values()){
+            if (item.getItem() instanceof BattleItem){
+                items.add((BattleItem) item.getItem());
+            }
+        }
+        return items;
+    }
+
+    //gets all the consumable items in the enum
+    //@return ArrayList<ConsumableItem> of all the consumable items
+    public static ArrayList<ConsumableItem> getConsumableItems(){
+        ArrayList<ConsumableItem> items = new ArrayList<>();
+        for (CustomItems item : CustomItems.values()){
+            if (item.getItem() instanceof ConsumableItem){
+                items.add((ConsumableItem) item.getItem());
+            }
         }
         return items;
     }
