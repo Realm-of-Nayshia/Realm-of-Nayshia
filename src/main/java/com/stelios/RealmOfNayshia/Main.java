@@ -50,6 +50,7 @@ public final class Main extends JavaPlugin {
     private QuestManager questManager;
     private NpcInfoManager npcInfoManager;
     private PacketManager packetManager;
+    private FileManager fileManager;
 
     @Override
     public void onEnable() {
@@ -93,6 +94,7 @@ public final class Main extends JavaPlugin {
         questManager = new QuestManager();
         npcInfoManager = new NpcInfoManager();
         packetManager = new PacketManager();
+        fileManager = new FileManager();
     }
 
     private void registerEvents(){
@@ -195,6 +197,7 @@ public final class Main extends JavaPlugin {
     public QuestManager getQuestManager() {return questManager;}
     public NpcInfoManager getNpcInfoManager() {return npcInfoManager;}
     public PacketManager getPacketManager() {return packetManager;}
+    public FileManager getFileManager() {return fileManager;}
 
 
     @Override
