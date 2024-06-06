@@ -139,11 +139,11 @@ public class FileManager {
                         break;
                     case "weapon", "armor", "accessory":
                         Document battleDocument = Document.parse(battleItemGson.toJson(jsonObject));
-                        items.add(battleDocument);
+                        battleItems.add(battleDocument);
                         break;
                     case "consumable":
                         Document consumableDocument = Document.parse(consumableGson.toJson(jsonObject));
-                        items.add(consumableDocument);
+                        consumableItems.add(consumableDocument);
                         break;
                 }
             }
@@ -158,7 +158,7 @@ public class FileManager {
             if (!consumableItems.isEmpty()) {
                 consumableItemCollection.insertMany(consumableItems);
             }
-            main.getLogger().info("Successfully pushed items from file to database");
+            main.getLogger().info("Successfully pushed items from file to database!");
         } catch (IOException e) {
             main.getLogger().severe("Failed to read items from file: " + e.getMessage());
         }
