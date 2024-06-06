@@ -131,20 +131,27 @@ public class FileManager {
             //iterate through the json array and add the items to the appropriate list
             for (JsonElement element : jsonArray) {
                 JsonObject jsonObject = element.getAsJsonObject();
+                String name = jsonObject.get("name").getAsString();
                 String type = jsonObject.get("itemType").getAsString();
-                switch (type) {
-                    case "regular":
-                        Document itemDocument = Document.parse(itemGson.toJson(jsonObject));
-                        items.add(itemDocument);
-                        break;
-                    case "weapon", "armor", "accessory":
-                        Document battleDocument = Document.parse(battleItemGson.toJson(jsonObject));
-                        battleItems.add(battleDocument);
-                        break;
-                    case "consumable":
-                        Document consumableDocument = Document.parse(consumableGson.toJson(jsonObject));
-                        consumableItems.add(consumableDocument);
-                        break;
+
+                //check if the item already exists in the database
+                boolean exists = checkIfItemExists(name, type);
+
+                if (!exists) {
+                    switch (type) {
+                        case "regular":
+                            Document itemDocument = Document.parse(itemGson.toJson(jsonObject));
+                            items.add(itemDocument);
+                            break;
+                        case "accessory", "armor", "weapon":
+                            Document battleDocument = Document.parse(battleItemGson.toJson(jsonObject));
+                            battleItems.add(battleDocument);
+                            break;
+                        case "consumable":
+                            Document consumableDocument = Document.parse(consumableGson.toJson(jsonObject));
+                            consumableItems.add(consumableDocument);
+                            break;
+                    }
                 }
             }
 
@@ -162,6 +169,19 @@ public class FileManager {
         } catch (IOException e) {
             main.getLogger().severe("Failed to read items from file: " + e.getMessage());
         }
+    }
+
+    //check if an item with the given name and type already exists in the database
+    private boolean checkIfItemExists(String name, String type) {
+        MongoCollection<Document> collection = switch (type) {
+            case "weapon", "armor", "accessory" -> battleItemCollection;
+            case "consumable" -> consumableItemCollection;
+            default -> itemsCollection;
+        };
+
+        Document query = new Document("name", name);
+        long count = collection.countDocuments(query);
+        return count > 0;
     }
 
     //push the latest data from json files into the mongodb recipe collection
