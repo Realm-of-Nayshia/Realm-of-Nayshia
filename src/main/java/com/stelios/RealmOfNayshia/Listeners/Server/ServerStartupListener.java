@@ -1,9 +1,20 @@
 package com.stelios.RealmOfNayshia.Listeners.Server;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.stelios.RealmOfNayshia.Items.BattleItem;
+import com.stelios.RealmOfNayshia.Items.ConsumableItem;
+import com.stelios.RealmOfNayshia.Items.CustomItems;
+import com.stelios.RealmOfNayshia.Items.Item;
 import com.stelios.RealmOfNayshia.Main;
+import com.stelios.RealmOfNayshia.Managers.FileManager;
 import com.stelios.RealmOfNayshia.Managers.StatsManager;
 import com.stelios.RealmOfNayshia.Util.*;
+import com.stelios.RealmOfNayshia.Util.Serializers.BattleItemSerializer;
+import com.stelios.RealmOfNayshia.Util.Serializers.ConsumableItemSerializer;
+import com.stelios.RealmOfNayshia.Util.Serializers.ItemSerializer;
 import org.bson.Document;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +24,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class ServerStartupListener implements Listener {
@@ -38,6 +53,51 @@ public class ServerStartupListener implements Listener {
             main.getLogger().log(Level.SEVERE, "Plugin files are missing! Shutting down server...");
             main.getServer().shutdown();
         }
+
+
+
+
+        //update plugin json files with latest data
+        FileManager fileManager = main.getFileManager();
+        //fileManager.pullItemFile(new File(main.getDataFolder(), "testing.json"));
+        fileManager.pushItemsFromFile(itemFile);
+//        fileManager.updateItemsFile(itemFile);
+//        fileManager.updateRecipesFile(recipeFile);
+//        fileManager.updateQuestsFile(questFile);
+//        fileManager.updateSetBonusesFile(setBonuseFile);
+
+//        try{
+//            ArrayList<Item> items = CustomItems.getItems();
+//            Gson itemGson = new GsonBuilder()
+//                    .registerTypeAdapter(Item.class, new ItemSerializer())
+//                    .setPrettyPrinting().create();
+//            ArrayList<BattleItem> battleItems = CustomItems.getBattleItems();
+//            Gson battleItemGson = new GsonBuilder()
+//                    .registerTypeAdapter(Item.class, new ItemSerializer())
+//                    .registerTypeAdapter(BattleItem.class, new BattleItemSerializer())
+//                    .setPrettyPrinting().create();
+//            ArrayList<ConsumableItem> consumableItems = CustomItems.getConsumableItems();
+//            Gson consumableItemGson = new GsonBuilder()
+//                    .registerTypeAdapter(Item.class, new ItemSerializer())
+//                    .registerTypeAdapter(ConsumableItem.class, new ConsumableItemSerializer())
+//                    .setPrettyPrinting().create();
+//
+//            //write items to file
+//            Writer writer = new FileWriter(itemFile, true);
+//            for (Item item : items){
+//                itemGson.toJson(item, writer);
+//            }
+//            for (BattleItem item : battleItems){
+//                battleItemGson.toJson(item, writer);
+//            }
+//            for (ConsumableItem item : consumableItems){
+//                consumableItemGson.toJson(item, writer);
+//            }
+//            writer.flush();
+//            writer.close();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
 
         //saving player stats every hour
         new BukkitRunnable(){
